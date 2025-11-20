@@ -11,4 +11,8 @@
     <string name="text_with_prefix">" %1$s!</string>
     <string name="text_with_suffix">%1$s "</string>
     <string name="exitButtonDescription">Boton para salir al listado principal de los personajes.</string>
+
+    <string name="loading">Cargando...</string>
+    <string name="error">Error:</string>
+
 </resources>

@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Safety Inspector"
-                android:drawableStart="@drawable/person"
+                android:drawableStart="@drawable/person_24px"
                 android:textColor="@color/infoFont"
                 android:textSize="13sp"
                 android:paddingTop="5dp"/>

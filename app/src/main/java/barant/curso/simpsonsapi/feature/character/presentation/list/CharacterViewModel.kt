@@ -11,12 +11,6 @@ import kotlinx.coroutines.launch
 
 class CharacterViewModel(private val getAll: GetCharacterUseCase) : ViewModel(){
 
-    data class UiState(
-        val isLoading: Boolean = false,
-        val data: List<Character>? = null,
-        val error: ErrorApp? = null
-    )
-
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
 
@@ -34,4 +28,10 @@ class CharacterViewModel(private val getAll: GetCharacterUseCase) : ViewModel(){
     fun onError(error: ErrorApp){
         _uiState.value = UiState(error = error)
     }
+
+    data class UiState(
+        val isLoading: Boolean = false,
+        val data: List<Character>? = null,
+        val error: ErrorApp? = null
+    )
 }

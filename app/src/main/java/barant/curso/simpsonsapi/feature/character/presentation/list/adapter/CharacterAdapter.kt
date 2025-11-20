@@ -6,16 +6,18 @@ import barant.curso.simpsonsapi.feature.character.domain.Character
 import androidx.recyclerview.widget.RecyclerView
 import barant.curso.simpsonsapi.databinding.ItemCharacterListBinding
 
-class CharacterAdapter(private val list: List<Character>) :
+class CharacterAdapter(private val list: List<Character>, private val onClick: (Character) -> Unit) :
     RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
     class ViewHolder(private val binding: ItemCharacterListBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(character: Character){
+        fun bind(character: Character, onClick: (Character) -> Unit){
             binding.nameCharacter.text = character.name
             binding.occupationCharacter.text = character.occupation
             binding.ageCharacter.text = "( " + character.age.toString() + " )"
             binding.genderCharacter.text = character.gender
             binding.phraseCharacter.text = character.phrase
-
+            binding.root.setOnClickListener {
+                onClick(character)
+            }
         }
     }
 
@@ -25,7 +27,7 @@ class CharacterAdapter(private val list: List<Character>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position], onClick)
     }
 
     override fun getItemCount(): Int = list.size

@@ -38,9 +38,9 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character){
     fun setupObserver(){
         val observer = Observer<CharacterViewModel.UiState>{ uiState ->
             if (uiState.isLoading){
-                binding.subtitleList.text = "Loading..."
+                binding.subtitleList.text = getString(R.string.loading)
             } else if (uiState.error != null){
-                binding.subtitleList.text = "Error: ${uiState.error}"
+                binding.subtitleList.text = getString(R.string.error).plus(" ").plus(uiState.error.message)
             } else if (uiState.data != null){
                 setupRecyclerList(uiState.data)
             }
@@ -48,8 +48,15 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character){
         viewModel.uiState.observe(viewLifecycleOwner, observer)
     }
 
+    fun onCharacterClicked(character: Character){
+
+    }
     fun setupRecyclerList(list: List<Character>){
-        val adapter = CharacterAdapter(list)
+        val adapter = CharacterAdapter(list){
+            viewModel.onCharacterClicked(it)
+            val action = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment()
+            findNavController().navigate(action)
+        }
         binding.characterContainer.apply {
             layoutManager = LinearLayoutManager(context)
             this.adapter = adapter
