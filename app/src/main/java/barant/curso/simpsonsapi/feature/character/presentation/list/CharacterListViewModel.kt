@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import barant.curso.simpsonsapi.core.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import barant.curso.simpsonsapi.feature.character.domain.GetCharacterUseCase
+import barant.curso.simpsonsapi.feature.character.domain.GetAllCharacterUseCase
 import kotlinx.coroutines.launch
 
-class CharacterViewModel(private val getAll: GetCharacterUseCase) : ViewModel(){
+class CharacterListViewModel(private val getAll: GetAllCharacterUseCase) : ViewModel(){
 
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState

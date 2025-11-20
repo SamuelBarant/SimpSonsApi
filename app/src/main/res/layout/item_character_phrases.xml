@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="italic"
-        android:textColor="@color/black"
+        android:textColor="@color/infoFont"
         android:background="@drawable/item_phrases_background"
         android:padding="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

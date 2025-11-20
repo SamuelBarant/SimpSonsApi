@@ -217,10 +217,10 @@
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/exitButton"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/exitButtonDescription"
-        android:translationX="330dp"
-        android:translationY="650dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
         android:src="@drawable/subdirectory_arrow_left_24px"/>
 </FrameLayout>

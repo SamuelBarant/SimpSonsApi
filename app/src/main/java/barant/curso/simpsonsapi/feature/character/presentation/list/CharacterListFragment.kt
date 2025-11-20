@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.databinding.FragmentListCharacterBinding
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterAdapter
+import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterListFragment : Fragment(R.layout.fragment_list_character){
 
-    val viewModel: CharacterViewModel by viewModel()
+    val viewModel: CharacterListViewModel by viewModel()
     private var _binding: FragmentListCharacterBinding? = null
     private val binding get() = _binding!!
 
@@ -36,7 +37,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character){
     }
 
     fun setupObserver(){
-        val observer = Observer<CharacterViewModel.UiState>{ uiState ->
+        val observer = Observer<CharacterListViewModel.UiState>{ uiState ->
             if (uiState.isLoading){
                 binding.subtitleList.text = getString(R.string.loading)
             } else if (uiState.error != null){
@@ -48,13 +49,9 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character){
         viewModel.uiState.observe(viewLifecycleOwner, observer)
     }
 
-    fun onCharacterClicked(character: Character){
-
-    }
     fun setupRecyclerList(list: List<Character>){
-        val adapter = CharacterAdapter(list){
-            viewModel.onCharacterClicked(it)
-            val action = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment()
+        val adapter = CharacterListItemAdapter(list) { selectedCharacter ->
+            val action = CharacterListFragmentDirections.actionCharacterListToCharacterDetail(selectedCharacter.id)
             findNavController().navigate(action)
         }
         binding.characterContainer.apply {
