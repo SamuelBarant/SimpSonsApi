@@ -1,14 +1,19 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import barant.curso.simpsonsapi.feature.character.domain.Character
 import androidx.recyclerview.widget.RecyclerView
 import barant.curso.simpsonsapi.databinding.ItemCharacterListBinding
+import barant.curso.simpsonsapi.feature.character.domain.Character
 
-class CharacterListItemAdapter(private val list: List<Character>, private val onItemClick: (Character) -> Unit) :
+class CharacterListItemAdapter(
+    private val list: List<Character>,
+    private val onItemClick: (Character) -> Unit
+) :
     RecyclerView.Adapter<CharacterListItemAdapter.ViewHolder>() {
-    class ViewHolder(private val binding: ItemCharacterListBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(character: Character, onItemClick: (Character) -> Unit){
+    class ViewHolder(private val binding: ItemCharacterListBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(character: Character, onItemClick: (Character) -> Unit) {
             binding.nameCharacter.text = character.name
             binding.occupationCharacter.text = character.occupation
             binding.ageCharacter.text = character.age.toString().plus(" ").plus(
@@ -23,7 +28,8 @@ class CharacterListItemAdapter(private val list: List<Character>, private val on
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemCharacterListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCharacterListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 

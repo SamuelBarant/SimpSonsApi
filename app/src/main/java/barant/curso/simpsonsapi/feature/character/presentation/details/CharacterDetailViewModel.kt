@@ -9,25 +9,25 @@ import barant.curso.simpsonsapi.feature.character.domain.Character
 import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import kotlinx.coroutines.launch
 
-class CharacterDetailViewModel(val getByID: GetByIdCharacterUseCase): ViewModel() {
+class CharacterDetailViewModel(val getByID: GetByIdCharacterUseCase) : ViewModel() {
     private val _uiState = MutableLiveData<UiSate>()
     val uiState: LiveData<UiSate> = _uiState
 
-    fun loadCharacter(id:Int){
+    fun loadCharacter(id: Int) {
         viewModelScope.launch {
             _uiState.value = UiSate(isLoading = true)
             getByID(id).fold(
-                {onSuccess(it)},
-                {onFailure(it as ErrorApp)}
+                { onSuccess(it) },
+                { onFailure(it as ErrorApp) }
             )
         }
     }
 
-    fun onSuccess(character: Character){
+    fun onSuccess(character: Character) {
         _uiState.value = UiSate(data = character)
     }
 
-    fun onFailure(error: ErrorApp){
+    fun onFailure(error: ErrorApp) {
         _uiState.value = UiSate(error = error)
     }
 

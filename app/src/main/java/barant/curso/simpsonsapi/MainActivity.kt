@@ -1,10 +1,7 @@
 package barant.curso.simpsonsapi
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import barant.curso.simpsonsapi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

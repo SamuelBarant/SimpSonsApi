@@ -21,28 +21,31 @@ class CharacterRoomDataLocalSource {
         "Better them than me... Oh wait, that was me.",
         "Marge, my face hurts again!"
     )
-    val list: MutableList<Character> = mutableListOf(Character(
-        1,
-        "homer",
-        25,
-        "Hombre",
-        "15/5/2006",
-        "Nuclear",
-        "alive",
-        phrases,
-        "lkj"
-    ))
+    val list: MutableList<Character> = mutableListOf(
+        Character(
+            1,
+            "homer",
+            25,
+            "Hombre",
+            "15/5/2006",
+            "Nuclear",
+            "alive",
+            phrases,
+            "lkj"
+        )
+    )
 
-    suspend fun getCharacter(): Result<List<Character>>{
-        if (list.isEmpty()){
+    suspend fun getCharacter(): Result<List<Character>> {
+        if (list.isEmpty()) {
             return Result.failure(ErrorApp.DataEmptyErrorApp)
         }
         return Result.success(list)
     }
-    suspend fun getByIdCharacter(id: Int): Result<Character>{
-        if (list.isEmpty()){
+
+    suspend fun getByIdCharacter(id: Int): Result<Character> {
+        if (list.isEmpty()) {
             return Result.failure(ErrorApp.DataEmptyErrorApp)
         }
-        return Result.success(list.find { it.id ==  id}!!)
+        return Result.success(list.find { it.id == id }!!)
     }
 }

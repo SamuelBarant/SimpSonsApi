@@ -25,15 +25,43 @@ class GetAllCharacterUseCaseTest {
     @Test
     fun `when App return data`() = runBlocking {
         //Given
-        val phrases: List<String> = listOf("Doh!", "Why you little...!", "Woo-hoo!", "Mmm... (food)... *drooling*", "Stupid Flanders!", "Shut up Flanders!", "AAAAGHH!", "Lisa, knock off that racket!", "Uh oh, the boss.", "Lets all go out for frosty chocolate milkshakes!", "Whatever, Ill be at Moes.", "I am evil Ho-mer! I am evil Ho-mer! I am evil Ho-mer!", "Better them than me.", "Better them than me... Oh wait, that was me.", "Marge, my face hurts again!")
-        val fakelist: MutableList<Character> = mutableListOf(Character(1, "homer", 25, "Hombre", "15/5/2006", "Nuclear", "alive", phrases, "lkj"))
+        val phrases: List<String> = listOf(
+            "Doh!",
+            "Why you little...!",
+            "Woo-hoo!",
+            "Mmm... (food)... *drooling*",
+            "Stupid Flanders!",
+            "Shut up Flanders!",
+            "AAAAGHH!",
+            "Lisa, knock off that racket!",
+            "Uh oh, the boss.",
+            "Lets all go out for frosty chocolate milkshakes!",
+            "Whatever, Ill be at Moes.",
+            "I am evil Ho-mer! I am evil Ho-mer! I am evil Ho-mer!",
+            "Better them than me.",
+            "Better them than me... Oh wait, that was me.",
+            "Marge, my face hurts again!"
+        )
+        val fakelist: MutableList<Character> = mutableListOf(
+            Character(
+                1,
+                "homer",
+                25,
+                "Hombre",
+                "15/5/2006",
+                "Nuclear",
+                "alive",
+                phrases,
+                "lkj"
+            )
+        )
         coEvery { repo.getAllCharacter() } returns Result.success(fakelist)
 
         //When
         val result = getAll()
 
         //Then
-        coVerify(exactly = 1){ repo.getAllCharacter() }
+        coVerify(exactly = 1) { repo.getAllCharacter() }
         assert(result.isSuccess)
         assert(result.getOrNull() == fakelist)
     }
@@ -48,6 +76,6 @@ class GetAllCharacterUseCaseTest {
 
         //Then
         assert(result.isFailure)
-        coVerify(exactly = 1){ repo.getAllCharacter() }
+        coVerify(exactly = 1) { repo.getAllCharacter() }
     }
 }

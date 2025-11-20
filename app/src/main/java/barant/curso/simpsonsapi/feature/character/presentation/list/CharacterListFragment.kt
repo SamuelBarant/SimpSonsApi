@@ -14,7 +14,7 @@ import barant.curso.simpsonsapi.feature.character.domain.Character
 import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterListFragment : Fragment(R.layout.fragment_list_character){
+class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
 
     val viewModel: CharacterListViewModel by viewModel()
     private var _binding: FragmentListCharacterBinding? = null
@@ -25,7 +25,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentListCharacterBinding.inflate(inflater,container,false)
+        _binding = FragmentListCharacterBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -36,22 +36,25 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character){
         viewModel.loadCharacters()
     }
 
-    fun setupObserver(){
-        val observer = Observer<CharacterListViewModel.UiState>{ uiState ->
-            if (uiState.isLoading){
+    fun setupObserver() {
+        val observer = Observer<CharacterListViewModel.UiState> { uiState ->
+            if (uiState.isLoading) {
                 binding.subtitleList.text = getString(R.string.loading)
-            } else if (uiState.error != null){
-                binding.subtitleList.text = getString(R.string.error).plus(" ").plus(uiState.error.message)
-            } else if (uiState.data != null){
+            } else if (uiState.error != null) {
+                binding.subtitleList.text =
+                    getString(R.string.error).plus(" ").plus(uiState.error.message)
+            } else if (uiState.data != null) {
                 setupRecyclerList(uiState.data)
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, observer)
     }
 
-    fun setupRecyclerList(list: List<Character>){
+    fun setupRecyclerList(list: List<Character>) {
         val adapter = CharacterListItemAdapter(list) { selectedCharacter ->
-            val action = CharacterListFragmentDirections.actionCharacterListToCharacterDetail(selectedCharacter.id)
+            val action = CharacterListFragmentDirections.actionCharacterListToCharacterDetail(
+                selectedCharacter.id
+            )
             findNavController().navigate(action)
         }
         binding.characterContainer.apply {

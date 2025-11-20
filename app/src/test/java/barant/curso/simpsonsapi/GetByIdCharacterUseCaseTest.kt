@@ -17,8 +17,8 @@ class GetByIdCharacterUseCaseTest {
     lateinit var getById: GetByIdCharacterUseCase
 
     @Before
-    fun setUp(){
-        MockKAnnotations.init(this,true)
+    fun setUp() {
+        MockKAnnotations.init(this, true)
         getById = GetByIdCharacterUseCase(repo)
     }
 
@@ -44,7 +44,7 @@ class GetByIdCharacterUseCaseTest {
         val result = getById(characterId)
 
         //Then
-        coVerify(exactly = 1){repo.getByIdCharacter(characterId)}
+        coVerify(exactly = 1) { repo.getByIdCharacter(characterId) }
         assert(result.isSuccess)
         assert(fakeCharacter == result.getOrNull())
 
@@ -62,7 +62,7 @@ class GetByIdCharacterUseCaseTest {
         val result = getById(characterId)
 
         //Then
-        coVerify(exactly = 1){repo.getByIdCharacter(characterId)}
+        coVerify(exactly = 1) { repo.getByIdCharacter(characterId) }
         assert(result.isFailure)
         assert(exception == result.exceptionOrNull())
 

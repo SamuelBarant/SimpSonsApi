@@ -14,4 +14,4 @@ data class Character(
     val status: String,
     val phrase: List<String>,
     val img: String
-): Parcelable
+) : Parcelable

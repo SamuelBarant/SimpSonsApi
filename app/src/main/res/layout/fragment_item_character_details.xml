@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/principal_background_gradient">
 
     <LinearLayout
@@ -16,10 +16,10 @@
             android:id="@+id/nameCharacter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Homer Simpsons"
+            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/black"/>
+            tools:text="Homer Simpsons" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,21 +55,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/labelAgeCharacter"
                         android:drawableStart="@drawable/calendar_today_24px"
                         android:drawablePadding="4dp"
                         android:paddingStart="5sp"
+                        android:text="@string/labelAgeCharacter"
                         android:textSize="15sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/ageCharacter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="39 años"
                         android:paddingStart="10dp"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp"
+                        tools:text="39 años" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,10 +83,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/labelGenderCharacter"
                         android:drawableStart="@drawable/person_24px"
                         android:drawablePadding="4dp"
                         android:paddingStart="5sp"
+                        android:text="@string/labelGenderCharacter"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -95,9 +95,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="Masculine"
+                        android:paddingStart="10dp"
                         android:textSize="15sp"
-                        android:paddingStart="10dp" />
+                        tools:text="Masculine" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -111,10 +111,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/labelOccupationCharacter"
                         android:drawableStart="@drawable/person_24px"
                         android:drawablePadding="4dp"
                         android:paddingStart="5sp"
+                        android:text="@string/labelOccupationCharacter"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -123,9 +123,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="Safety Inspector"
+                        android:paddingStart="10dp"
                         android:textSize="15sp"
-                        android:paddingStart="10dp" />
+                        tools:text="Safety Inspector" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -139,10 +139,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/labelStateCharacter"
                         android:drawableStart="@drawable/favorite_24px"
                         android:drawablePadding="4dp"
                         android:paddingStart="5sp"
+                        android:text="@string/labelStateCharacter"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -151,10 +151,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="Alive"
+                        android:paddingStart="10dp"
                         android:textSize="15sp"
-                        android:paddingStart="10dp" />
-                    </LinearLayout>
+                        tools:text="Alive" />
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -167,10 +168,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/labelBirthdateCharacter"
                         android:drawableStart="@drawable/person_24px"
                         android:drawablePadding="4dp"
                         android:paddingStart="5sp"
+                        android:text="@string/labelBirthdateCharacter"
                         android:textSize="13sp"
                         android:textStyle="bold" />
 
@@ -179,9 +180,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        tools:text="15/05/2006"
+                        android:paddingStart="10dp"
                         android:textSize="12dp"
-                        android:paddingStart="10dp" />
+                        tools:text="15/05/2006" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -197,9 +198,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/labelPhrasesCharacter"
-                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -210,17 +211,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="9dp"
-                    tools:listitem="@layout/item_character_phrases"
-                    tools:itemCount="50"/>
+                    tools:itemCount="50"
+                    tools:listitem="@layout/item_character_phrases" />
             </ScrollView>
         </LinearLayout>
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/exitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/exitButtonDescription"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:src="@drawable/subdirectory_arrow_left_24px"/>
+        android:contentDescription="@string/exitButtonDescription"
+        android:src="@drawable/subdirectory_arrow_left_24px" />
 </FrameLayout>

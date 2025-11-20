@@ -4,17 +4,17 @@
     <!-- Estado PRESIONADO -->
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="@color/foreground"/>
-            <corners android:radius="10dp"/>
-            <stroke android:color="@color/borderHover" android:width="2dp"/>
+            <solid android:color="@color/foreground" />
+            <corners android:radius="10dp" />
+            <stroke android:width="2dp" android:color="@color/borderHover" />
         </shape>
     </item>
 
     <!-- Estado NORMAL -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/foreground"/>
-            <corners android:radius="10dp"/>
+            <solid android:color="@color/foreground" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 
