@@ -1,7 +1,6 @@
-package barant.curso.simpsonsapi
+package barant.curso.simpsonsapi.core.di
 
 import android.app.Application
-import barant.curso.simpsonsapi.core.di.characterModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,7 +10,7 @@ class MainApplication : Application() {
 
         startKoin {
             androidContext(this@MainApplication)
-            modules(characterModule)
+            modules(featureModule)
         }
     }
 

@@ -1,4 +1,4 @@
-package barant.curso.simpsonsapi.core.di
+package barant.curso.simpsonsapi.feature.character.di
 
 import barant.curso.simpsonsapi.feature.character.data.CharacterDataSourceRepository
 import barant.curso.simpsonsapi.feature.character.data.local.room.CharacterRoomDataLocalSource
