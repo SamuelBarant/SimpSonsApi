@@ -1,4 +1,5 @@
 package barant.curso.simpsonsapi.feature.character.domain
+
 import barant.curso.simpsonsapi.core.error.ErrorApp
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

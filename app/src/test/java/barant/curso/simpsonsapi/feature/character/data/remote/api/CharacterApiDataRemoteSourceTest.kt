@@ -1,22 +1,22 @@
 package barant.curso.simpsonsapi.feature.character.data.remote.api
 
 import barant.curso.simpsonsapi.core.error.ErrorApp
+import barant.curso.simpsonsapi.feature.character.domain.Character
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
-import barant.curso.simpsonsapi.feature.character.domain.Character
-import io.mockk.coEvery
-import io.mockk.coVerify
 
 class CharacterApiDataRemoteSourceTest {
     @RelaxedMockK
     private lateinit var api: CharacterApiDataRemoteSource
 
     @Before
-    fun setUp(){
-        MockKAnnotations.init(this,true)
+    fun setUp() {
+        MockKAnnotations.init(this, true)
     }
 
     @Test

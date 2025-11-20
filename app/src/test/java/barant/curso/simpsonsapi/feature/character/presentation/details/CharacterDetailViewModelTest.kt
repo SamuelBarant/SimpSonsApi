@@ -29,14 +29,14 @@ class CharacterDetailViewModelTest {
     private lateinit var viewModel: CharacterDetailViewModel
 
     @Before
-    fun setUp(){
+    fun setUp() {
         MockKAnnotations.init(this)
         Dispatchers.setMain(StandardTestDispatcher())
         viewModel = CharacterDetailViewModel(useCase)
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         Dispatchers.resetMain()
     }
 
@@ -85,6 +85,6 @@ class CharacterDetailViewModelTest {
         assert(result.data == null)
         assert(!result.isLoading)
         assert(result.error != null)
-        coVerify(exactly = 1){useCase(idCharacter)}
+        coVerify(exactly = 1) { useCase(idCharacter) }
     }
 }

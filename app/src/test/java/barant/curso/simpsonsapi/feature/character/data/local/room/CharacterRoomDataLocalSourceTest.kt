@@ -1,7 +1,6 @@
 package barant.curso.simpsonsapi.feature.character.data.local.room
 
 import barant.curso.simpsonsapi.core.error.ErrorApp
-import barant.curso.simpsonsapi.feature.character.data.remote.api.CharacterApiDataRemoteSource
 import barant.curso.simpsonsapi.feature.character.domain.Character
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -16,8 +15,8 @@ class CharacterRoomDataLocalSourceTest {
     private lateinit var room: CharacterRoomDataLocalSource
 
     @Before
-    fun setUp(){
-        MockKAnnotations.init(this,true)
+    fun setUp() {
+        MockKAnnotations.init(this, true)
     }
 
     @Test

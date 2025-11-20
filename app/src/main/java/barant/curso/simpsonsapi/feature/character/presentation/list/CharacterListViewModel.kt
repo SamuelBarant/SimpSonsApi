@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class CharacterListViewModel(private val getAll: GetAllCharacterUseCase) : ViewModel() {
 
-    private val _uiState = MutableLiveData(UiState())
+    private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
 
     fun loadCharacters() {

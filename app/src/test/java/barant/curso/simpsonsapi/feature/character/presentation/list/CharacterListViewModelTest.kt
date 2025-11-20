@@ -10,9 +10,7 @@ import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -31,14 +29,14 @@ class CharacterListViewModelTest {
     private lateinit var viewModel: CharacterListViewModel
 
     @Before
-    fun setUp(){
+    fun setUp() {
         MockKAnnotations.init(this)
         Dispatchers.setMain(StandardTestDispatcher())
         viewModel = CharacterListViewModel(useCase)
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         Dispatchers.resetMain()
     }
 
@@ -86,6 +84,6 @@ class CharacterListViewModelTest {
         assert(state.data == null)
         assert(state.error != null)
         assert(!state.isLoading)
-        coVerify(exactly = 1){ useCase() }
+        coVerify(exactly = 1) { useCase() }
     }
 }
