@@ -42,11 +42,13 @@ android {
 
 dependencies {
     // Unit test
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
     // MockK
-    testImplementation("io.mockk:mockk:1.14.6")
+    testImplementation(libs.mockk)
     // Corrutinas (si usas coroutines)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation(libs.kotlinx.coroutines.test)
+    // Test viewModel
+    testImplementation(libs.androidx.core.testing)
 
     //Koin
     implementation(libs.koin.android)
@@ -64,4 +66,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(kotlin("test"))
 }

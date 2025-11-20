@@ -1,8 +1,5 @@
-package barant.curso.simpsonsapi
+package barant.curso.simpsonsapi.feature.character.domain
 
-import barant.curso.simpsonsapi.feature.character.domain.Character
-import barant.curso.simpsonsapi.feature.character.domain.CharacterRepository
-import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -26,7 +23,6 @@ class GetByIdCharacterUseCaseTest {
     fun `when App return data`() = runBlocking {
         //Given
         val characterId = 1
-        val phrases = listOf("Doh!", "Woo-hoo!")
         val fakeCharacter = Character(
             id = characterId,
             name = "Homer",
@@ -35,7 +31,7 @@ class GetByIdCharacterUseCaseTest {
             birthdate = "15/5/2006",
             occupation = "Nuclear",
             status = "alive",
-            phrase = phrases,
+            phrase = emptyList(),
             img = "lkj"
         )
         coEvery { repo.getByIdCharacter(characterId) } returns Result.success(fakeCharacter)
@@ -47,8 +43,6 @@ class GetByIdCharacterUseCaseTest {
         coVerify(exactly = 1) { repo.getByIdCharacter(characterId) }
         assert(result.isSuccess)
         assert(fakeCharacter == result.getOrNull())
-
-
     }
 
     @Test
