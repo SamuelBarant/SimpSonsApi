@@ -1,18 +1,16 @@
-package barant.curso.simpsonsapi.feature.character.presentation.list
+package barant.curso.simpsonsapi.feature.character.presentation.details
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import barant.curso.simpsonsapi.core.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import barant.curso.simpsonsapi.feature.character.domain.GetAllCharacterUseCase
+import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -21,20 +19,20 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class CharacterListViewModelTest {
+class CharacterDetailViewModelTest {
     @get:Rule
     var rule = InstantTaskExecutorRule()
 
     @RelaxedMockK
-    lateinit var useCase: GetAllCharacterUseCase
+    lateinit var useCase: GetByIdCharacterUseCase
 
-    private lateinit var viewModel: CharacterListViewModel
+    private lateinit var viewModel: CharacterDetailViewModel
 
     @Before
     fun setUp(){
         MockKAnnotations.init(this)
         Dispatchers.setMain(StandardTestDispatcher())
-        viewModel = CharacterListViewModel(useCase)
+        viewModel = CharacterDetailViewModel(useCase)
     }
 
     @After
@@ -43,11 +41,12 @@ class CharacterListViewModelTest {
     }
 
     @Test
-    fun `when loadCharacter return list`() = runTest {
+    fun `when viewModel returns success`() = runTest {
         //Given
-        val fakelist: List<Character> = listOf(
+        val idCharacter = 1
+        val fakeCharacter =
             Character(
-                1,
+                idCharacter,
                 "homer",
                 25,
                 "Hombre",
@@ -57,35 +56,35 @@ class CharacterListViewModelTest {
                 emptyList(),
                 "lkj"
             )
-        )
-        coEvery { useCase() } returns Result.success(fakelist)
+        coEvery { useCase(idCharacter) } returns Result.success(fakeCharacter)
 
         //When
-        viewModel.loadCharacters()
+        viewModel.loadCharacter(idCharacter)
 
         //Then
         delay(100)
-        val state = viewModel.uiState.value!!
-        assert(state.data!!.containsAll(fakelist))
-        assert(!state.isLoading)
-        assert(state.error == null)
-        coVerify(exactly = 1) { useCase() }
+        val status = viewModel.uiState.value!!
+        assert(status.data == fakeCharacter)
+        assert(!status.isLoading)
+        assert(status.error == null)
+        coVerify(exactly = 1) { useCase(idCharacter) }
     }
 
     @Test
-    fun `when loadCharacter return error`() = runTest {
+    fun `when viewModel returns failure`() = runTest {
         //Given
-        coEvery { useCase() } returns Result.failure(ErrorApp.ItemNotFoundErrorApp)
+        val idCharacter = 1
+        coEvery { useCase(idCharacter) } returns Result.failure(ErrorApp.ItemNotFoundErrorApp)
 
         //When
-        viewModel.loadCharacters()
+        viewModel.loadCharacter(idCharacter)
 
         //Then
         delay(100)
-        val state = viewModel.uiState.value!!
-        assert(state.data == null)
-        assert(state.error != null)
-        assert(!state.isLoading)
-        coVerify(exactly = 1){ useCase() }
+        val result = viewModel.uiState.value!!
+        assert(result.data == null)
+        assert(!result.isLoading)
+        assert(result.error != null)
+        coVerify(exactly = 1){useCase(idCharacter)}
     }
 }

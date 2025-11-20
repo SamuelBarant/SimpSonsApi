@@ -49,6 +49,8 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     // Test viewModel
     testImplementation(libs.androidx.core.testing)
+    implementation(libs.kotlinx.coroutines.android)
+    testImplementation(libs.kotlinx.coroutines.test.v160)
 
     //Koin
     implementation(libs.koin.android)
