@@ -52,6 +52,20 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     testImplementation(libs.kotlinx.coroutines.test.v160)
 
+    //okhttp3
+    implementation(platform(libs.okhttp.bom))
+
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.okhttp3.okhttp)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    //Gson
+    implementation(libs.gson)
+
     //Koin
     implementation(libs.koin.android)
     implementation(libs.koin.core)
