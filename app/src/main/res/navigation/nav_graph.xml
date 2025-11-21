@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/characterListFragment">
+
+    <fragment
+        android:id="@+id/characterListFragment"
+        android:name="barant.curso.simpsonsapi.feature.character.presentation.list.CharacterListFragment"
+        android:label="CharacterListFragment">
+        <action
+            android:id="@+id/action_characterList_to_characterDetail"
+            app:destination="@+id/characterListDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterListDetailFragment"
+        android:name="barant.curso.simpsonsapi.feature.character.presentation.details.CharacterDetailFragment"
+        android:label="CharacterListDetailFragment">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/back_to_list"
+            app:destination="@id/characterListFragment" />
+    </fragment>
+</navigation>
