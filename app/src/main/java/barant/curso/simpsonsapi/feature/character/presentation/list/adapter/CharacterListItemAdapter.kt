@@ -14,15 +14,17 @@ class CharacterListItemAdapter(
     class ViewHolder(private val binding: ItemCharacterListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character, onItemClick: (Character) -> Unit) {
-            binding.nameCharacter.text = character.name
-            binding.occupationCharacter.text = character.occupation
-            binding.ageCharacter.text = character.age.toString().plus(" ").plus(
-                binding.root.context.getString(barant.curso.simpsonsapi.R.string.ageSuffix)
-            )
-            binding.genderCharacter.text = character.gender
-            binding.phraseCharacter.text = character.phrase[0]
-            binding.root.setOnClickListener {
-                onItemClick(character)
+            binding.apply {
+                nameCharacter.text = character.name
+                occupationCharacter.text = character.occupation
+                ageCharacter.text = character.age.toString().plus(" ").plus(
+                    binding.root.context.getString(barant.curso.simpsonsapi.R.string.ageSuffix)
+                )
+                genderCharacter.text = character.gender
+                phraseCharacter.text = character.phrase[0]
+                root.setOnClickListener {
+                    onItemClick(character)
+                }
             }
         }
     }
