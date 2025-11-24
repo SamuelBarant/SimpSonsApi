@@ -21,7 +21,7 @@ class CharacterListItemAdapter(
                     binding.root.context.getString(barant.curso.simpsonsapi.R.string.ageSuffix)
                 )
                 genderCharacter.text = character.gender
-                phraseCharacter.text = character.phrase[0]
+                phraseCharacter.text = character.phrase?.getOrNull(0) ?: ""
                 root.setOnClickListener {
                     onItemClick(character)
                 }

@@ -22,7 +22,7 @@ class CharacterSharedPreferenceDataLocalSourceTest {
     @Test
     fun `when room getCharacter, return success data`() = runBlocking {
         //Given
-        val fakelist: MutableList<barant.curso.simpsonsapi.feature.character.domain.Character> =
+        val fakelist: MutableList<Character> =
             mutableListOf(
                 Character(
                     1,

@@ -44,6 +44,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
                 binding.subtitleList.text =
                     getString(R.string.error).plus(" ").plus(uiState.error.message)
             } else if (uiState.data != null) {
+                binding.subtitleList.text = getString(R.string.subtitleList)
                 setupRecyclerList(uiState.data)
             }
         }

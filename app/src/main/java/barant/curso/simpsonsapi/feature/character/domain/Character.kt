@@ -9,9 +9,9 @@ data class Character(
     val name: String,
     val age: Int,
     val gender: String,
-    val birthdate: String,
+    val birthdate: String?,
     val occupation: String,
     val status: String,
-    val phrase: List<String>,
+    val phrase: List<String>?,
     val img: String
 ) : Parcelable
