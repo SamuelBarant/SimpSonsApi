@@ -30,57 +30,67 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="10dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/nameCharacter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/nameFont"
-                android:textSize="16sp"
-                tools:text="Homer Simpsons" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp">
+                    <TextView
+                        android:id="@+id/nameCharacter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/nameFont"
+                        android:textSize="16sp"
+                        tools:text="Homer Simpsons" />
+                    <TextView
+                        android:id="@+id/ageCharacter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="-60dp"
+                        android:textSize="12sp"
+                        tools:text="(39años)" />
 
-            <TextView
-                android:id="@+id/occupationCharacter"
+                    <TextView
+                        android:id="@+id/genderCharacter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:paddingStart="30dp"
+                        android:textColor="@color/infoFont"
+                        tools:text="M" />
+                </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/person_24px"
-                android:paddingTop="5dp"
-                android:textColor="@color/infoFont"
-                android:textSize="13sp"
-                tools:text="Safety Inspector" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/occupationCharacter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/person_24px"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/infoFont"
+                    android:textSize="13sp"
+                    tools:text="Safety Inspector" />
 
-            <TextView
-                android:id="@+id/phraseCharacter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/infoFont"
-                android:textSize="12sp"
-                android:textStyle="italic"
-                tools:text="´Doh!´" />
+                <TextView
+                    android:id="@+id/phraseCharacter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/infoFont"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    tools:text="´Doh!´" />
+
+            </LinearLayout>
+
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/ageCharacter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="10dp"
-            android:paddingEnd="-60dp"
-            android:textSize="12sp"
-            tools:text="(39años)" />
-
-        <TextView
-            android:id="@+id/genderCharacter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="start"
-            android:paddingStart="30dp"
-            android:textColor="@color/infoFont"
-            tools:text="M" />
-    </LinearLayout>
+        </LinearLayout>
 </androidx.cardview.widget.CardView>

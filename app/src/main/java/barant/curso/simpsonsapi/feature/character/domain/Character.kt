@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Character(
     val id: Int,
     val name: String,
-    val age: Int,
+    val age: Int?,
     val gender: String,
     val birthdate: String?,
     val occupation: String,

@@ -1,7 +1,7 @@
 package barant.curso.simpsonsapi.core.data.remote.api
 
 import android.util.Log
-import barant.curso.simpsonsapi.core.error.ErrorApp
+import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import retrofit2.Response
 import java.net.ConnectException
 import java.net.SocketTimeoutException

@@ -58,6 +58,10 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
 
+    //Img
+    implementation(libs.coil3.coil)
+    implementation(libs.coil.network.okhttp)
+
 // Retrofit
     implementation(libs.retrofit.v300)
     implementation(libs.converter.gson)

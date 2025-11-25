@@ -1,8 +1,11 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import barant.curso.simpsonsapi.R
+import barant.curso.simpsonsapi.core.presentation.ext.fromUrl
 import barant.curso.simpsonsapi.databinding.ItemCharacterListBinding
 import barant.curso.simpsonsapi.feature.character.domain.Character
 
@@ -17,11 +20,12 @@ class CharacterListItemAdapter(
             binding.apply {
                 nameCharacter.text = character.name
                 occupationCharacter.text = character.occupation
-                ageCharacter.text = character.age.toString().plus(" ").plus(
-                    binding.root.context.getString(barant.curso.simpsonsapi.R.string.ageSuffix)
-                )
+                ageCharacter.text = character.age?.let { age ->
+                    "$age ${binding.root.context.getString(R.string.ageSuffix)}"
+                } ?: ""
                 genderCharacter.text = character.gender
                 phraseCharacter.text = character.phrase?.getOrNull(0) ?: ""
+                imgCharacter.fromUrl(character.img)
                 root.setOnClickListener {
                     onItemClick(character)
                 }

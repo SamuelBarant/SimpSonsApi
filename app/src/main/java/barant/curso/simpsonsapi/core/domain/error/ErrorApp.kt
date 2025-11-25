@@ -1,4 +1,4 @@
-package barant.curso.simpsonsapi.core.error
+package barant.curso.simpsonsapi.core.domain.error
 
 sealed class ErrorApp : Throwable() {
     object InternetConnectionErrorApp : ErrorApp()

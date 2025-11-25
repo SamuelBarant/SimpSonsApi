@@ -10,8 +10,8 @@ import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 @OptIn(ExperimentalSerializationApi::class)
 data class CharacterApiModel(
     val id: Int,
-    val age: Int,
-    val birthdate: String,
+    val age: Int?,
+    val birthdate: String?,
     val gender: String,
     val name: String,
     val occupation: String,
