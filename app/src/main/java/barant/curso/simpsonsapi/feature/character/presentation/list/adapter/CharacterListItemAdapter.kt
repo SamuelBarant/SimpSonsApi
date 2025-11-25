@@ -1,6 +1,5 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +41,8 @@ class CharacterListItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(list[position], onItemClick)
     }
-    fun addItems(newItems: List<Character>){
+
+    fun addItems(newItems: List<Character>) {
         val start = list.size
         list.addAll(newItems)
         notifyItemRangeInserted(start, newItems.size)

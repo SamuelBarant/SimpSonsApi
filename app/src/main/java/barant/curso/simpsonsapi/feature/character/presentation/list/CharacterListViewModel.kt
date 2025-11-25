@@ -17,34 +17,34 @@ class CharacterListViewModel(private val getAll: GetAllCharacterUseCase) : ViewM
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
 
-    fun loadCharacters(){
+    fun loadCharacters() {
         loadPage(1)
     }
 
-    fun loadNextCharacters(){
-        if (!isLoadingPage){
-            loadPage(currentPage+1)
+    fun loadNextCharacters() {
+        if (!isLoadingPage) {
+            loadPage(currentPage + 1)
         }
     }
 
-    private fun loadPage(page:Int){
+    private fun loadPage(page: Int) {
         viewModelScope.launch {
             isLoadingPage = true
-            _uiState.value = UiState(isLoading = true)
+            _uiState.value = UiState(isLoading = true, data = loadedCharacters.toList())
 
             getAll(page).fold(
-                {onSuccess(page,it)},
-                {onError(it as ErrorApp)}
+                { onSuccess(page, it) },
+                { onError(it as ErrorApp) }
             )
 
             isLoadingPage = false
         }
     }
 
-    fun onSuccess(page: Int,list: List<Character>) {
+    fun onSuccess(page: Int, list: List<Character>) {
         currentPage = page
         loadedCharacters.addAll(list)
-        _uiState.value = UiState(data = loadedCharacters.toList())
+        _uiState.value = UiState(data = list)
     }
 
     fun onError(error: ErrorApp) {

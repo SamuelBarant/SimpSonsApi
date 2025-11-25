@@ -70,12 +70,12 @@ class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_detail
     }
 
     fun setupRecyclerList(list: List<String>?) {
-        if (list != null){
-        val adapter = CharacterDetailPhrasesAdapter(list)
-        binding.listPhrasesCharacterContainer.apply {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
-        }
+        if (list != null) {
+            val adapter = CharacterDetailPhrasesAdapter(list)
+            binding.listPhrasesCharacterContainer.apply {
+                layoutManager = LinearLayoutManager(context)
+                this.adapter = adapter
+            }
         }
     }
 

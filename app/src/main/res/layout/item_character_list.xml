@@ -34,42 +34,46 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp">
-                    <TextView
-                        android:id="@+id/nameCharacter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/nameFont"
-                        android:textSize="16sp"
-                        tools:text="Homer Simpsons" />
-                    <TextView
-                        android:id="@+id/ageCharacter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="-60dp"
-                        android:textSize="12sp"
-                        tools:text="(39años)" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="10dp">
 
-                    <TextView
-                        android:id="@+id/genderCharacter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:paddingStart="30dp"
-                        android:textColor="@color/infoFont"
-                        tools:text="M" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/nameCharacter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/nameFont"
+                    android:textSize="16sp"
+                    tools:text="Homer Simpsons" />
+
+                <TextView
+                    android:id="@+id/ageCharacter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="-60dp"
+                    android:textSize="12sp"
+                    tools:text="(39años)" />
+
+                <TextView
+                    android:id="@+id/genderCharacter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:paddingStart="30dp"
+                    android:textColor="@color/infoFont"
+                    tools:text="M" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/occupationCharacter"
                     android:layout_width="match_parent"
@@ -92,5 +96,5 @@
             </LinearLayout>
 
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

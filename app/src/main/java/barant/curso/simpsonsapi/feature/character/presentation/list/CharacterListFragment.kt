@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.databinding.FragmentListCharacterBinding
-import barant.curso.simpsonsapi.feature.character.domain.Character
 import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +19,7 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
     val viewModel: CharacterListViewModel by viewModel()
     private var _binding: FragmentListCharacterBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var adapter: CharacterListItemAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,12 +31,40 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
         return view
     }
 
-    private lateinit var adapter: CharacterListItemAdapter
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerList()
         setupObserver()
+
         viewModel.loadCharacters()
+    }
+
+    fun setupRecyclerList() {
+        adapter = CharacterListItemAdapter(mutableListOf()) { selectCharacter ->
+            val action = CharacterListFragmentDirections
+                .actionCharacterListToCharacterDetail(selectCharacter.id)
+            findNavController().navigate(action)
+        }
+
+        binding.apply {
+            characterContainer.layoutManager = LinearLayoutManager(context)
+            characterContainer.adapter = adapter
+
+            characterContainer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val lm = recyclerView.layoutManager as LinearLayoutManager
+                    val totalItemCount = lm.itemCount
+                    val lastVisible = lm.findLastVisibleItemPosition()
+
+                    if (lastVisible >= totalItemCount - 3) {
+                        viewModel.loadNextCharacters()
+                    }
+                }
+            })
+        }
     }
 
     fun setupObserver() {
@@ -49,44 +76,12 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
                     getString(R.string.error).plus(" ").plus(uiState.error.message)
             } else if (uiState.data != null) {
                 binding.subtitleList.text = getString(R.string.subtitleList)
-                setupRecyclerList(uiState.data)
+                adapter.addItems(uiState.data)
             }
         }
         viewModel.uiState.observe(viewLifecycleOwner, observer)
     }
 
-    private lateinit var adapter: CharacterListItemAdapter
-
-    fun setupRecyclerList(list: List<Character>) {
-        if (!::adapter.isInitialized) {
-            adapter = CharacterListItemAdapter(list.toMutableList()) { selectedCharacter ->
-                val action = CharacterListFragmentDirections.actionCharacterListToCharacterDetail(
-                    selectedCharacter.id
-                )
-                findNavController().navigate(action)
-            }
-
-            binding.characterContainer.apply {
-                layoutManager = LinearLayoutManager(context)
-                this.adapter = adapter
-
-                addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        super.onScrolled(recyclerView, dx, dy)
-                        val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                        val totalItemCount = layoutManager.itemCount
-                        val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-
-                        if (lastVisibleItemPosition >= totalItemCount - 3) {
-                            viewModel.loadNextCharacters()
-                        }
-                    }
-                })
-            }
-        } else {
-            adapter.addItems(list)
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

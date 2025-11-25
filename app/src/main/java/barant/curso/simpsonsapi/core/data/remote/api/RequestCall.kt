@@ -17,7 +17,7 @@ suspend fun <T : Any> apiCall(call: suspend () -> Response<T>): Result<T> {
             is UnknownHostException -> Result.failure(ErrorApp.ServerErrorApp)
             is SocketTimeoutException -> Result.failure(ErrorApp.InternetConnectionErrorApp)
             else -> {
-                Log.d("@code",e.toString())
+                Log.d("@code", e.toString())
                 Result.failure(ErrorApp.UnknownErrorApp)
             }
         }
@@ -27,7 +27,7 @@ suspend fun <T : Any> apiCall(call: suspend () -> Response<T>): Result<T> {
     } else {
         when (response.code()) {
             else -> {
-                Log.d("@code",response.code().toString())
+                Log.d("@code", response.code().toString())
                 Result.failure(ErrorApp.UnknownErrorApp)
             }
         }

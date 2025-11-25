@@ -2,7 +2,8 @@
 ---
 
 Este será mi primer proyecto hecho de manera totalmente independiente en **Kotlin Android**.  
-La idea es practicar y aplicar todo lo que he ido aprendiendo, haciendo una app que consuma datos de una API pública de *The Simpsons*.
+La idea es practicar y aplicar todo lo que he ido aprendiendo, haciendo una app que consuma datos de
+una API pública de *The Simpsons*.
 
 ## Objetivos
 
@@ -24,6 +25,7 @@ La idea es practicar y aplicar todo lo que he ido aprendiendo, haciendo una app 
 ## Estructura
 
 El proyecto sigue una estructura basada en Clean Architecture:
+
 * core/
 * data/
 * domain/
