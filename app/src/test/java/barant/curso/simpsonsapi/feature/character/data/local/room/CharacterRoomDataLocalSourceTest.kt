@@ -1,6 +1,6 @@
 package barant.curso.simpsonsapi.feature.character.data.local.room
 
-import barant.curso.simpsonsapi.core.error.ErrorApp
+import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

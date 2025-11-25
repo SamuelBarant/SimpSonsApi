@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.21"
 }
 
 android {
@@ -37,6 +38,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -52,9 +54,29 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     testImplementation(libs.kotlinx.coroutines.test.v160)
 
-    //Koin
-    implementation(libs.koin.android)
+    // Koin
     implementation(libs.koin.core)
+    implementation(libs.koin.android)
+
+    //Img
+    implementation(libs.coil3.coil)
+    implementation(libs.coil.network.okhttp)
+
+// Retrofit
+    implementation(libs.retrofit.v300)
+    implementation(libs.converter.gson)
+    implementation(libs.kotlinx.serialization.json.v190)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+// Converter para Kotlinx Serialization
+    implementation(libs.converter.kotlinx.serialization)
+// OkHttp
+    implementation(libs.okhttp)
+// Logging interceptor para debug
+    implementation(libs.okhttp3.logging.interceptor)
+// Kotlinx Serialization JSON
+    implementation(libs.kotlinx.serialization.json.v190)
+// Coroutines
+    implementation(libs.kotlinx.coroutines.android)
 
     //Native
     implementation(libs.androidx.core.ktx)

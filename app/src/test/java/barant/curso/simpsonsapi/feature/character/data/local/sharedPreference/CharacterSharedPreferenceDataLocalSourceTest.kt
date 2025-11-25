@@ -1,6 +1,6 @@
 package barant.curso.simpsonsapi.feature.character.data.local.sharedPreference
 
-import barant.curso.simpsonsapi.core.error.ErrorApp
+import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -22,7 +22,7 @@ class CharacterSharedPreferenceDataLocalSourceTest {
     @Test
     fun `when room getCharacter, return success data`() = runBlocking {
         //Given
-        val fakelist: MutableList<barant.curso.simpsonsapi.feature.character.domain.Character> =
+        val fakelist: MutableList<Character> =
             mutableListOf(
                 Character(
                     1,

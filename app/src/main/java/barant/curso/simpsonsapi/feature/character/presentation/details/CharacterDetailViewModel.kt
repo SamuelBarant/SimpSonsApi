@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import barant.curso.simpsonsapi.core.error.ErrorApp
+import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
 import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import kotlinx.coroutines.launch

@@ -9,9 +9,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import barant.curso.simpsonsapi.R
+import barant.curso.simpsonsapi.core.presentation.ext.fromUrl
 import barant.curso.simpsonsapi.databinding.FragmentItemCharacterDetailsBinding
 import barant.curso.simpsonsapi.feature.character.presentation.details.adapter.CharacterDetailPhrasesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_details) {
     val viewModel: CharacterDetailViewModel by viewModel()
@@ -42,29 +45,37 @@ class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_detail
 
     fun setupObserver() {
         viewModel.uiState.observe(viewLifecycleOwner, { uiState ->
-            if (uiState.isLoading) {
-                binding.nameCharacter.text = getString(R.string.loading)
-            } else if (uiState.error != null) {
-                binding.nameCharacter.text =
-                    getString(R.string.error).plus(" ").plus(uiState.error.message)
-            } else if (uiState.data != null) {
-                binding.nameCharacter.text = uiState.data.name
-                binding.ageCharacter.text =
-                    uiState.data.age.toString().plus(" ").plus(getString(R.string.ageSuffix))
-                binding.genderCharacter.text = uiState.data.gender
-                binding.occupationCharacter.text = uiState.data.occupation
-                binding.birthdateCharacter.text = uiState.data.birthdate
-                binding.statusCharacter.text = uiState.data.status
-                setupRecyclerList(uiState.data.phrase)
+            binding.apply {
+                if (uiState.isLoading) {
+                    nameCharacter.text = getString(R.string.loading)
+                } else if (uiState.error != null) {
+                    nameCharacter.text =
+                        getString(R.string.error).plus(" ").plus(uiState.error.message)
+                } else if (uiState.data != null) {
+                    nameCharacter.text = uiState.data.name
+                    ageCharacter.text = uiState.data.age?.let { age ->
+                        "$age ${binding.root.context.getString(R.string.ageSuffix)}"
+                    } ?: "-------"
+                    genderCharacter.text = uiState.data.gender
+                    occupationCharacter.text = uiState.data.occupation
+                    birthdateCharacter.text = uiState.data.birthdate?.let {
+                        LocalDate.parse(it).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    } ?: "-------"
+                    statusCharacter.text = uiState.data.status
+                    imgCharacter.fromUrl(uiState.data.img)
+                    setupRecyclerList(uiState.data.phrase)
+                }
             }
         })
     }
 
-    fun setupRecyclerList(list: List<String>) {
-        val adapter = CharacterDetailPhrasesAdapter(list)
-        binding.listPhrasesCharacterContainer.apply {
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+    fun setupRecyclerList(list: List<String>?) {
+        if (list != null) {
+            val adapter = CharacterDetailPhrasesAdapter(list)
+            binding.listPhrasesCharacterContainer.apply {
+                layoutManager = LinearLayoutManager(context)
+                this.adapter = adapter
+            }
         }
     }
 
