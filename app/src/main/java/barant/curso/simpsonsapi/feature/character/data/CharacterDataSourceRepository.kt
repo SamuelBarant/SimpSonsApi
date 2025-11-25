@@ -7,8 +7,8 @@ import barant.curso.simpsonsapi.feature.character.domain.CharacterRepository
 class CharacterDataSourceRepository(
     private val api: CharactersApiRemoteDataSource,
 ) : CharacterRepository {
-    override suspend fun getAllCharacter(): Result<List<Character>> {
-        return api.getCharacters()
+    override suspend fun getCharacters(page:Int): Result<List<Character>> {
+        return api.getCharactersNextPage(page)
     }
 
     override suspend fun getByIdCharacter(id: Int): Result<Character> {

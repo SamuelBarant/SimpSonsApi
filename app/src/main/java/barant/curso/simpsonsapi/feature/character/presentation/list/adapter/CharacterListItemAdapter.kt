@@ -10,7 +10,7 @@ import barant.curso.simpsonsapi.databinding.ItemCharacterListBinding
 import barant.curso.simpsonsapi.feature.character.domain.Character
 
 class CharacterListItemAdapter(
-    private val list: List<Character>,
+    private val list: MutableList<Character>,
     private val onItemClick: (Character) -> Unit
 ) :
     RecyclerView.Adapter<CharacterListItemAdapter.ViewHolder>() {
@@ -41,6 +41,11 @@ class CharacterListItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(list[position], onItemClick)
+    }
+    fun addItems(newItems: List<Character>){
+        val start = list.size
+        list.addAll(newItems)
+        notifyItemRangeInserted(start, newItems.size)
     }
 
     override fun getItemCount(): Int = list.size
