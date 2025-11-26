@@ -1,51 +1,41 @@
 package barant.curso.simpsonsapi.feature.character.data.local.sharedPreference
 
+import barant.curso.simpsonsapi.core.data.remote.local.xml.SharedPreferenceStorage
 import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
-class CharacterSharedPreferenceDataLocalSource {
-    val phrases: List<String> = listOf(
-        "Doh!",
-        "Why you little...!",
-        "Woo-hoo!",
-        "Mmm... (food)... *drooling*",
-        "Stupid Flanders!",
-        "Shut up Flanders!",
-        "AAAAGHH!",
-        "Lisa, knock off that racket!",
-        "Uh oh, the boss.",
-        "Lets all go out for frosty chocolate milkshakes!",
-        "Whatever, Ill be at Moes.",
-        "I am evil Ho-mer! I am evil Ho-mer! I am evil Ho-mer!",
-        "Better them than me.",
-        "Better them than me... Oh wait, that was me.",
-        "Marge, my face hurts again!"
-    )
-    val list: MutableList<Character> = mutableListOf(
-        Character(
-            1,
-            "homer",
-            25,
-            "Hombre",
-            "15/5/2006",
-            "Nuclear",
-            "alive",
-            phrases,
-            "lkj"
-        )
-    )
+class CharacterSharedPreferenceDataLocalSource (private val sharedPreferenceStorage: SharedPreferenceStorage){
 
-    suspend fun getCharacter(): Result<List<Character>> {
-        if (list.isEmpty()) {
-            return Result.failure(ErrorApp.DataEmptyErrorApp)
-        }
+    private val prefsKey = "characters"
+
+    suspend fun getAllCharacters(): Result<List<Character>>{
+        val listType: Type = object : TypeToken<List<Character>>() {}.type
+        val list: List<Character> = sharedPreferenceStorage.get(prefsKey, listType)
+            ?: return Result.failure(ErrorApp.CacheEmptyErrorApp)
         return Result.success(list)
     }
 
+    suspend fun saveAll(list : List<Character>){
+        sharedPreferenceStorage.create(prefsKey,list)
+    }
+
+
     suspend fun getByIdCharacter(id: Int): Result<Character> {
-        if (list.isEmpty()) {
-            return Result.failure(ErrorApp.DataEmptyErrorApp)
-        }
-        return Result.success(list.find { it.id == id }!!)
+        return getAllCharacters().fold(
+            onSuccess = { list ->
+                val character = list.find { it.id == id }
+                if (character != null){
+                    Result.success(character)
+                } else {
+                    Result.failure(ErrorApp.ItemNotFoundErrorApp)
+                }
+            },
+            onFailure = {
+                Result.failure(ErrorApp.CacheEmptyErrorApp)
+            }
+        )
     }
 }

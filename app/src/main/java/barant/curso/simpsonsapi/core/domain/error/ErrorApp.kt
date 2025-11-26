@@ -6,4 +6,5 @@ sealed class ErrorApp : Throwable() {
     object UnknownErrorApp : ErrorApp()
     object DataEmptyErrorApp : ErrorApp()
     object ItemNotFoundErrorApp : ErrorApp()
+    object CacheEmptyErrorApp : ErrorApp()
 }

@@ -12,7 +12,7 @@ class CharactersApiRemoteDataSource(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun getCharactersNextPage(page: Int): Result<List<Character>> =
+    suspend fun getCharacterPage(page: Int): Result<List<Character>> =
         withContext(dispatcher) {
             val resultApi = apiCall { characterApiService.getPagesItems(page) }
             Log.d("page", resultApi.toString())
