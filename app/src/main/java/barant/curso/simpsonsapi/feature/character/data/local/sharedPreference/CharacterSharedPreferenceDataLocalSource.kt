@@ -18,8 +18,8 @@ class CharacterSharedPreferenceDataLocalSource (private val sharedPreferenceStor
         return Result.success(list)
     }
 
-    suspend fun saveAll(list : List<Character>){
-        sharedPreferenceStorage.create(prefsKey,list)
+    suspend fun saveAll(page: Int, list : List<Character>){
+        sharedPreferenceStorage.create(prefsKey, "page: $page, $list")
     }
 
 
@@ -37,5 +37,8 @@ class CharacterSharedPreferenceDataLocalSource (private val sharedPreferenceStor
                 Result.failure(ErrorApp.CacheEmptyErrorApp)
             }
         )
+    }
+    suspend fun remove(){
+        sharedPreferenceStorage.remove(prefsKey)
     }
 }

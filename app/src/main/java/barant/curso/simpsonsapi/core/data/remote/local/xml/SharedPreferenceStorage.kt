@@ -28,7 +28,7 @@ class SharedPreferenceStorage(
         }
     }
 
-    fun <T> remove(key: String){
+    fun remove(key: String){
         sharedPrefs.edit {
             remove(key)
         }
