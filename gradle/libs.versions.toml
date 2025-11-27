@@ -23,13 +23,18 @@ okhttpBom = "5.3.2"
 recyclerview = "1.4.0"
 navigationFragmentKtx = "2.9.6"
 navigationUiKtx = "2.9.6"
-retrofit = "2.11.0"
+retrofit = "3.0.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 retrofitVersion = "3.0.0"
+room = "2.8.4"
+ksp = "2.2.21-2.0.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 coil = { module = "io.coil-kt.coil3:coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 coil3-coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
@@ -60,4 +65,5 @@ retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
