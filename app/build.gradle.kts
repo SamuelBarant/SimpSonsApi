@@ -45,6 +45,9 @@ android {
 }
 
 dependencies {
+    // Page3
+    implementation(libs.androidx.paging.runtime)
+
     // Room
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)

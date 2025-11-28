@@ -11,7 +11,11 @@ class CharacterDataSourceRepository(
     private val cache: CharacterSharedPreferenceDataLocalSource
 ) : CharacterRepository {
     override suspend fun getCharacters(page: Int): Result<List<Character>> {
-        return api.getCharacterPage(page)
+        val resultApi = api.getCharacterPage(page)
+        resultApi.onSuccess {
+            cache.saveAll(page,it)
+        }
+        return cache.getAllCharacters()
     }
 
     override suspend fun getByIdCharacter(id: Int): Result<Character> {
