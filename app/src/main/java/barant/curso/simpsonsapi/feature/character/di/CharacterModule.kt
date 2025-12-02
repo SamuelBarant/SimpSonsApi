@@ -4,34 +4,28 @@ import barant.curso.simpsonsapi.feature.character.data.CharacterDataSourceReposi
 import barant.curso.simpsonsapi.feature.character.data.remote.api.CharacterApiService
 import barant.curso.simpsonsapi.feature.character.data.remote.api.CharactersApiRemoteDataSource
 import barant.curso.simpsonsapi.feature.character.domain.CharacterRepository
-import barant.curso.simpsonsapi.feature.character.domain.GetAllCharacterUseCase
-import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
-import barant.curso.simpsonsapi.feature.character.presentation.details.CharacterDetailViewModel
-import barant.curso.simpsonsapi.feature.character.presentation.details.adapter.CharacterDetailPhrasesAdapter
+import barant.curso.simpsonsapi.feature.character.domain.GetPageCharacterUseCase
 import barant.curso.simpsonsapi.feature.character.presentation.list.CharacterListViewModel
 import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.factoryOf
-import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val characterModule = module {
     // ViewModels
-    viewModelOf(::CharacterListViewModel)
-    viewModelOf(::CharacterDetailViewModel)
+    viewModel { CharacterListViewModel(get()) }
 
     // UI adapters
     factoryOf(::CharacterListItemAdapter)
-    factoryOf(::CharacterDetailPhrasesAdapter)
 
     // Repository
     factoryOf(::CharacterDataSourceRepository) bind CharacterRepository::class
 
     // Use cases
-    factory { GetAllCharacterUseCase(get()) }
-    factory { GetByIdCharacterUseCase(get()) }
+    factory { GetPageCharacterUseCase(get()) }
 
     // Retrofit service
     single { get<Retrofit>().create(CharacterApiService::class.java) }

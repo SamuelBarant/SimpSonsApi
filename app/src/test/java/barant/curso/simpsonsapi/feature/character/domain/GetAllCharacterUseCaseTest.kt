@@ -12,12 +12,12 @@ import org.junit.Test
 class GetAllCharacterUseCaseTest {
     @RelaxedMockK
     private lateinit var repo: CharacterRepository
-    lateinit var getAll: GetAllCharacterUseCase
+    lateinit var getAll: GetPageCharacterUseCase
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        getAll = GetAllCharacterUseCase(repo)
+        getAll = GetPageCharacterUseCase(repo)
     }
 
     @Test

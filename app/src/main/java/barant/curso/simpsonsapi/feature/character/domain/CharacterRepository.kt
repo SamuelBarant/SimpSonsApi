@@ -1,6 +1,8 @@
 package barant.curso.simpsonsapi.feature.character.domain
 
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+
 interface CharacterRepository {
-    suspend fun getCharacters(page: Int): Result<List<Character>>
-    suspend fun getByIdCharacter(id: Int): Result<Character>
+    fun getPageCharacters(): Flow<PagingData<Character>>
 }

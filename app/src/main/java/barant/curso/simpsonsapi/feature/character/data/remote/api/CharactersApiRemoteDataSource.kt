@@ -12,17 +12,11 @@ class CharactersApiRemoteDataSource(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
 
-    suspend fun getCharactersNextPage(page: Int): Result<List<Character>> =
+    suspend fun getCharactersPage(page: Int): List<Character> =
         withContext(dispatcher) {
             val resultApi = apiCall { characterApiService.getPagesItems(page) }
             Log.d("page", resultApi.toString())
-            resultApi.map { it.results.map { it.toDomain() } }
-        }
 
-    suspend fun getByIdCharacter(id: Int): Result<Character> {
-        return withContext(dispatcher) {
-            val resultApi = apiCall { characterApiService.getByIdCharacter(id) }
-            resultApi.map { it.toDomain() }
+            resultApi.getOrElse { throw it }.results.map { it.toDomain() }
         }
-    }
 }

@@ -43,16 +43,8 @@ android {
 }
 
 dependencies {
-    // Unit test
-    testImplementation(libs.junit)
-    // MockK
-    testImplementation(libs.mockk)
-    // Corrutinas (si usas coroutines)
-    testImplementation(libs.kotlinx.coroutines.test)
-    // Test viewModel
-    testImplementation(libs.androidx.core.testing)
-    implementation(libs.kotlinx.coroutines.android)
-    testImplementation(libs.kotlinx.coroutines.test.v160)
+    //Paging3
+    implementation(libs.androidx.paging.runtime)
 
     // Koin
     implementation(libs.koin.core)
@@ -62,20 +54,17 @@ dependencies {
     implementation(libs.coil3.coil)
     implementation(libs.coil.network.okhttp)
 
-// Retrofit
+    //Retrofit
     implementation(libs.retrofit.v300)
     implementation(libs.converter.gson)
     implementation(libs.kotlinx.serialization.json.v190)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
-// Converter para Kotlinx Serialization
     implementation(libs.converter.kotlinx.serialization)
-// OkHttp
     implementation(libs.okhttp)
-// Logging interceptor para debug
     implementation(libs.okhttp3.logging.interceptor)
-// Kotlinx Serialization JSON
     implementation(libs.kotlinx.serialization.json.v190)
-// Coroutines
+
+    //Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
     //Native
@@ -87,6 +76,13 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    //Test
+    testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
+    implementation(libs.kotlinx.coroutines.android)
+    testImplementation(libs.kotlinx.coroutines.test.v160)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

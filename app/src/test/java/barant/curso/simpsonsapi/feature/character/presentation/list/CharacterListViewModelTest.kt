@@ -3,7 +3,7 @@ package barant.curso.simpsonsapi.feature.character.presentation.list
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import barant.curso.simpsonsapi.feature.character.domain.GetAllCharacterUseCase
+import barant.curso.simpsonsapi.feature.character.domain.GetPageCharacterUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -24,7 +24,7 @@ class CharacterListViewModelTest {
     var rule = InstantTaskExecutorRule()
 
     @RelaxedMockK
-    lateinit var useCase: GetAllCharacterUseCase
+    lateinit var useCase: GetPageCharacterUseCase
 
     private lateinit var viewModel: CharacterListViewModel
 
