@@ -2,9 +2,11 @@ package barant.curso.simpsonsapi.feature.character.presentation.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.databinding.FragmentListCharacterBinding
@@ -32,7 +34,10 @@ class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
 
     private fun setupRecycler(){
         adapter = CharacterListItemAdapter{character ->
-
+            findNavController().navigate(
+                R.id.action_characterList_to_characterDetail,
+                bundleOf("id" to character.id)
+            )
         }
 
         binding.characterContainer.layoutManager = LinearLayoutManager(requireContext())

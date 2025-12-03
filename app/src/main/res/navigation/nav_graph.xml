@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/characterListDetailFragment"
-        android:name="barant.curso.simpsonsapi.feature.character.presentation.details.CharacterDetailFragment"
+        android:name="barant.curso.simpsonsapi.feature.character.presentation.detail.CharacterDetailFragment"
         android:label="CharacterListDetailFragment">
         <argument
             android:name="id"

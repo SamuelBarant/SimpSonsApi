@@ -12,6 +12,4 @@ import kotlinx.coroutines.launch
 
 class CharacterListViewModel(private val getPages: GetPageCharacterUseCase) : ViewModel() {
     val characters = getPages().cachedIn(viewModelScope)
-
-    
 }

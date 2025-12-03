@@ -19,4 +19,10 @@ class CharactersApiRemoteDataSource(
 
             resultApi.getOrElse { throw it }.results.map { it.toDomain() }
         }
+
+    suspend fun getByIdCharacter(id:Int): Character =
+        withContext(dispatcher){
+            val resultApi = apiCall { characterApiService.getByIdCharacter(id) }
+            resultApi.getOrElse { throw it }.toDomain()
+        }
 }

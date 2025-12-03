@@ -21,4 +21,8 @@ class CharacterDataSourceRepository(
             pagingSourceFactory = { CharacterPagingSource(api) }
         ).flow
     }
+
+    override suspend fun getByIdCharacters(id:Int): Character {
+        return api.getByIdCharacter(id)
+    }
 }
