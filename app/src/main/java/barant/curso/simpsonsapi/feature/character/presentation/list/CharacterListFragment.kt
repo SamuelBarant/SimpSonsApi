@@ -12,13 +12,14 @@ import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.Char
 import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListViewHolder
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
 
     private var _binding: FragmentListCharacterBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CharacterListViewModel by viewModels()
+    private val viewModel: CharacterListViewModel by viewModel()
     private lateinit var adapter: CharacterListItemAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
