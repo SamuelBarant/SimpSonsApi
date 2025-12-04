@@ -1,6 +1,5 @@
 package barant.curso.simpsonsapi.feature.character.data
 
-import barant.curso.simpsonsapi.feature.character.data.local.room.CharacterRoomDataLocalSource
 import barant.curso.simpsonsapi.feature.character.data.local.sharedPreference.CharacterSharedPreferenceDataLocalSource
 import barant.curso.simpsonsapi.feature.character.data.remote.api.CharacterApiDataRemoteSource
 import barant.curso.simpsonsapi.feature.character.domain.Character

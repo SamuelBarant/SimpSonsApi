@@ -9,7 +9,7 @@ import barant.curso.simpsonsapi.feature.character.domain.Character
 import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import kotlinx.coroutines.launch
 
-class CharacterDetailViewModel(private val getById: GetByIdCharacterUseCase) : ViewModel(){
+class CharacterDetailViewModel(private val getById: GetByIdCharacterUseCase) : ViewModel() {
     private val _uiState = MutableLiveData<UiState>()
     val uiState: LiveData<UiState> = _uiState
 

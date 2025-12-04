@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import barant.curso.simpsonsapi.databinding.ItemCharacterPhrasesBinding
 
-class CharacterPhrasesListAdapter(private val list: List<String>): RecyclerView.Adapter<CharacterPhrasesListViewHolder>() {
+class CharacterPhrasesListAdapter(private val list: List<String>) :
+    RecyclerView.Adapter<CharacterPhrasesListViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
