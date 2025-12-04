@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.2.21"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -43,6 +44,12 @@ android {
 }
 
 dependencies {
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
+
     //Paging3
     implementation(libs.androidx.paging.runtime)
 
