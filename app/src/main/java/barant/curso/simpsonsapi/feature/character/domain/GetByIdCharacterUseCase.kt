@@ -1,7 +1,9 @@
 package barant.curso.simpsonsapi.feature.character.domain
 
-class GetByIdCharacterUseCase(private val repository: CharacterRepository) {
-    suspend operator fun invoke(id: Int): Result<Character> {
-        return repository.getByIdCharacter(id)
+import barant.curso.simpsonsapi.feature.character.data.CharacterDataSourceRepository
+
+class GetByIdCharacterUseCase(private val repository: CharacterDataSourceRepository) {
+    suspend operator fun invoke(id:Int): Character{
+        return repository.getByIdCharacters(id)
     }
 }

@@ -3,7 +3,6 @@ package barant.curso.simpsonsapi.feature.character.presentation.details
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import barant.curso.simpsonsapi.core.domain.error.ErrorApp
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
