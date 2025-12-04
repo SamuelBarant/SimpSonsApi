@@ -1,4 +1,4 @@
-package barant.curso.simpsonsapi.feature.character.data.remote.paging
+package barant.curso.simpsonsapi.feature.character.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
