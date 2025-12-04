@@ -7,8 +7,6 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import barant.curso.simpsonsapi.core.data.local.cache.AppCache
 import barant.curso.simpsonsapi.feature.character.data.local.room.character.toDomain
-import barant.curso.simpsonsapi.feature.character.data.remote.api.CharactersApiRemoteDataSource
-import barant.curso.simpsonsapi.feature.character.data.paging.CharacterPagingSource
 import barant.curso.simpsonsapi.feature.character.data.paging.CharacterRemoteMediator
 import barant.curso.simpsonsapi.feature.character.data.remote.api.CharacterApiService
 import barant.curso.simpsonsapi.feature.character.domain.Character
@@ -35,7 +33,7 @@ class CharacterDataSourceRepository(
             }
     }
 
-    override suspend fun getByIdCharacters(id:Int): Character {
+    override suspend fun getByIdCharacters(id: Int): Character {
         return database.characterDao().getById(id).toDomain()
     }
 }

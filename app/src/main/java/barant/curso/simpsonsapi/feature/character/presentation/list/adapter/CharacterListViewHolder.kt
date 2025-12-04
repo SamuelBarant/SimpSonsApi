@@ -6,9 +6,10 @@ import barant.curso.simpsonsapi.core.presentation.ext.fromUrl
 import barant.curso.simpsonsapi.databinding.ItemCharacterListBinding
 import barant.curso.simpsonsapi.feature.character.domain.Character
 
-class CharacterListViewHolder(private val binding: ItemCharacterListBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Character?, onItemClick: (Character)-> Unit){
-        if (item == null){
+class CharacterListViewHolder(private val binding: ItemCharacterListBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind(item: Character?, onItemClick: (Character) -> Unit) {
+        if (item == null) {
             binding.apply {
                 nameCharacter.text = "Loading..."
                 occupationCharacter.text = ""

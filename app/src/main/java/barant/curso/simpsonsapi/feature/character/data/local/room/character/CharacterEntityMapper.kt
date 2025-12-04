@@ -1,9 +1,8 @@
 package barant.curso.simpsonsapi.feature.character.data.local.room.character
 
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import kotlin.Int
 
-fun CharacterEntity.toDomain(): Character{
+fun CharacterEntity.toDomain(): Character {
     return Character(
         this.id,
         this.name,
@@ -16,7 +15,8 @@ fun CharacterEntity.toDomain(): Character{
         this.portrait_path
     )
 }
-fun Character.toEntity(): CharacterEntity{
+
+fun Character.toEntity(): CharacterEntity {
     return CharacterEntity(
         this.id,
         this.name,

@@ -10,7 +10,8 @@ class CharacterListItemAdapter(
     private val onItemClick: (Character) -> Unit
 ) : PagingDataAdapter<Character, CharacterListViewHolder>(CharacterListDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterListViewHolder {
-        val binding = ItemCharacterListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            ItemCharacterListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CharacterListViewHolder(binding)
     }
 

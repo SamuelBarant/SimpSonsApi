@@ -2,7 +2,6 @@ package barant.curso.simpsonsapi.feature.character.presentation.detail
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +9,6 @@ import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.core.presentation.ext.fromUrl
 import barant.curso.simpsonsapi.databinding.FragmentItemCharacterDetailsBinding
 import barant.curso.simpsonsapi.feature.character.presentation.detail.adapter.CharacterPhrasesListAdapter
-import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_details) {
@@ -35,7 +33,8 @@ class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_detail
         observeUi()
         viewModel.loadCharacter(id)
     }
-    private fun setupRecycler(){
+
+    private fun setupRecycler() {
         binding.listPhrasesCharacterContainer.layoutManager = LinearLayoutManager(requireContext())
         binding.listPhrasesCharacterContainer.adapter = adapter
     }
@@ -49,7 +48,8 @@ class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_detail
                 binding.apply {
                     nameCharacter.text = character.name
                     ageCharacter.text = character.age?.toString() ?: getString(R.string.unknown1)
-                    occupationCharacter.text = character.occupation.ifBlank { getString(R.string.unknown2) }
+                    occupationCharacter.text =
+                        character.occupation.ifBlank { getString(R.string.unknown2) }
                     genderCharacter.text = character.gender.ifBlank { getString(R.string.unknown2) }
                     imgCharacter.fromUrl(character.img)
                     statusCharacter.text = character.status.ifBlank { getString(R.string.unknown1) }

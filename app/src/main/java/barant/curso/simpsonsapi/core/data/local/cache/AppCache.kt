@@ -11,7 +11,7 @@ import barant.curso.simpsonsapi.feature.character.data.local.room.remoteKeys.Rem
 
 @Database(entities = [CharacterEntity::class, RemoteKeysEntity::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class AppCache : RoomDatabase(){
+abstract class AppCache : RoomDatabase() {
     abstract fun characterDao(): CharacterDao
     abstract fun remoteKeysDao(): RemoteKeysDao
 }

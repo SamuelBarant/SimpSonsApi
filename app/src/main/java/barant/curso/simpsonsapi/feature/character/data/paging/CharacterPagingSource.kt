@@ -7,7 +7,8 @@ import barant.curso.simpsonsapi.feature.character.domain.Character
 import okio.IOException
 import retrofit2.HttpException
 
-class CharacterPagingSource(val myBackend: CharactersApiRemoteDataSource): PagingSource<Int, Character>() {
+class CharacterPagingSource(val myBackend: CharactersApiRemoteDataSource) :
+    PagingSource<Int, Character>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         return try {
             val pageNumber = params.key ?: 1
@@ -16,9 +17,9 @@ class CharacterPagingSource(val myBackend: CharactersApiRemoteDataSource): Pagin
             val prevKey = if (pageNumber > 1) pageNumber - 1 else null
             val nextKey = if (response.isNotEmpty()) pageNumber + 1 else null
             LoadResult.Page(data = response, prevKey = prevKey, nextKey = nextKey)
-        } catch (e: IOException){
+        } catch (e: IOException) {
             LoadResult.Error(e)
-        } catch (e: HttpException){
+        } catch (e: HttpException) {
             LoadResult.Error(e)
         }
     }

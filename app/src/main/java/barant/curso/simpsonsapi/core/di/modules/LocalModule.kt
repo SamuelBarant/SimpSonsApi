@@ -4,7 +4,6 @@ import androidx.room.Room
 import barant.curso.simpsonsapi.core.data.local.cache.AppCache
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
-import kotlin.math.sin
 
 val localModule = module {
     single<AppCache> {

@@ -1,7 +1,6 @@
 package barant.curso.simpsonsapi.feature.character.data.paging
 
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.LoadState.Loading.endOfPaginationReached
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
@@ -12,13 +11,12 @@ import barant.curso.simpsonsapi.feature.character.data.local.room.character.toEn
 import barant.curso.simpsonsapi.feature.character.data.local.room.remoteKeys.RemoteKeysEntity
 import barant.curso.simpsonsapi.feature.character.data.remote.api.CharacterApiService
 import barant.curso.simpsonsapi.feature.character.data.remote.api.toDomain
-import barant.curso.simpsonsapi.feature.character.domain.Character
 
 @OptIn(ExperimentalPagingApi::class)
 class CharacterRemoteMediator(
     private val database: AppCache,
     private val apiService: CharacterApiService
-): RemoteMediator<Int, CharacterEntity>() {
+) : RemoteMediator<Int, CharacterEntity>() {
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, CharacterEntity>
@@ -28,9 +26,12 @@ class CharacterRemoteMediator(
                 LoadType.REFRESH -> 1
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull() ?: return MediatorResult.Success(endOfPaginationReached = true)
+                    val lastItem = state.lastItemOrNull() ?: return MediatorResult.Success(
+                        endOfPaginationReached = true
+                    )
                     val remoteKeys = database.remoteKeysDao().remoteKeysCharacterId(lastItem.id)
-                    remoteKeys?.nextKey ?: return MediatorResult.Success(endOfPaginationReached = true)
+                    remoteKeys?.nextKey
+                        ?: return MediatorResult.Success(endOfPaginationReached = true)
                 }
             }
 
@@ -56,7 +57,7 @@ class CharacterRemoteMediator(
             }
 
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             return MediatorResult.Error(e)
         }
     }
