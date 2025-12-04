@@ -7,7 +7,7 @@ import org.koin.dsl.module
 import kotlin.math.sin
 
 val localModule = module {
-    single {
+    single<AppCache> {
         Room.databaseBuilder(
             androidApplication(),
             AppCache::class.java,
