@@ -15,5 +15,6 @@
     <string name="unknown1">Desconocido</string>
     <string name="unknown2">No indicado</string>
     <string name="unknown3">Sin fecha</string>
+    <string name="searchBarHint">Buscar por nombre:</string>
 
 </resources>
