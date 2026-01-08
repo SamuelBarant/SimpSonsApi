@@ -1,86 +1,118 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list
 
 import android.os.Bundle
-import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import androidx.core.os.bundleOf
+import android.view.ViewGroup
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import barant.curso.simpsonsapi.R
-import barant.curso.simpsonsapi.databinding.FragmentListCharacterBinding
-import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import barant.curso.simpsonsapi.core.presentation.ui.components.SimpleSearchBar
+import barant.curso.simpsonsapi.core.presentation.ui.components.TopAppBarSimpsons
+import barant.curso.simpsonsapi.feature.character.presentation.CharacterUi
+import barant.curso.simpsonsapi.feature.character.presentation.LazyColumnSimpSons
+import com.example.compose.SimpSonsTheme
 
-class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
+class CharacterListFragment : Fragment() {
 
-    private var _binding: FragmentListCharacterBinding? = null
-    private val binding get() = _binding!!
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
-    private val viewModel: CharacterListViewModel by viewModel()
-    private lateinit var adapter: CharacterListItemAdapter
+        return ComposeView(requireContext()).apply {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentListCharacterBinding.bind(view)
-
-        setupRecycler()
-        setupSearchBar()
-        observerCharacter()
-    }
-
-    private fun setupRecycler() {
-        adapter = CharacterListItemAdapter { character ->
-            findNavController().navigate(
-                R.id.action_characterList_to_characterDetail,
-                bundleOf("id" to character.id)
+            setViewCompositionStrategy(
+                ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
             )
-        }
 
-        binding.characterContainer.layoutManager = LinearLayoutManager(requireContext())
-        binding.characterContainer.adapter = adapter
-    }
+            setContent {
 
-    private fun setupSearchBar() {
-        val searchBar = binding.searchBar
-        val searchView = binding.searchView
+                SimpSonsTheme {
 
-        searchView.setupWithSearchBar(searchBar)
+                    val gradient = Brush.linearGradient(
+                        listOf(
+                            colorResource(R.color.gradientBackgroundStart),
+                            colorResource(R.color.gradientBackgroundEnd)
+                        )
+                    )
 
-        binding.searchView.editText.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
-            ) {
-                val query = v.text.toString()
-                viewModel.onSearchQueryChanged(query)
-                binding.searchView.hide()
-                if (query.isNotEmpty()) {
-                    searchBar.hint = query
-                } else {
-                    searchBar.hint = getString(R.string.searchBarHint)
+                    // Datos mock
+                    val sampleCharacters = listOf(
+                        CharacterUi(
+                            imageRes = R.drawable.person_24px,
+                            name = "Homer Simpson",
+                            age = "45",
+                            gender = "M",
+                            occupation = "Nuclear Safety",
+                            phrase = "D'oh!"
+                        ),
+                        CharacterUi(
+                            imageRes = R.drawable.person_24px,
+                            name = "Marge Simpson",
+                            age = "43",
+                            gender = "F",
+                            occupation = "Homemaker",
+                            phrase = "Mmm..."
+                        ),
+                        CharacterUi(
+                            imageRes = R.drawable.person_24px,
+                            name = "Bart Simpson",
+                            age = "10",
+                            gender = "M",
+                            occupation = "Student",
+                            phrase = "Eat my shorts!"
+                        )
+                    )
+
+                    var query by remember { mutableStateOf("") }
+
+                    val filteredCharacters = remember(query) {
+                        if (query.isBlank()) {
+                            sampleCharacters
+                        } else {
+                            sampleCharacters.filter {
+                                it.name.contains(query, ignoreCase = true)
+                            }
+                        }
+                    }
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(gradient)
+                    ) {
+
+                        TopAppBarSimpsons(
+                            modifier = Modifier.fillMaxWidth(),
+                            label = getString(R.string.subtitleList)
+                        )
+
+                        SimpleSearchBar(
+                            query = query,
+                            onTextChanged = { query = it },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+
+                        LazyColumnSimpSons(
+                            characters = filteredCharacters
+                        )
+                    }
                 }
-                true
-            } else {
-                false
             }
         }
-
-    }
-
-    private fun observerCharacter() {
-        lifecycleScope.launch {
-            viewModel.characterFlow.collectLatest { pagingData ->
-                adapter.submitData(pagingData)
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding == null
     }
 }
