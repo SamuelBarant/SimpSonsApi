@@ -1,4 +1,4 @@
-package barant.curso.simpsonsapi.feature.character.presentation
+package barant.curso.simpsonsapi.feature.character.presentation.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,9 +10,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import barant.curso.simpsonsapi.feature.character.presentation.CharacterUi
 
 @Composable
-fun LazyColumnSimpSons(
+fun LazyColumnCharacter(
     characters: List<CharacterUi>,
     modifier: Modifier = Modifier
 ) {

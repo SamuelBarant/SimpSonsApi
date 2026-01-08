@@ -22,7 +22,6 @@ import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.core.presentation.ui.components.SimpleSearchBar
 import barant.curso.simpsonsapi.core.presentation.ui.components.TopAppBarSimpsons
 import barant.curso.simpsonsapi.feature.character.presentation.CharacterUi
-import barant.curso.simpsonsapi.feature.character.presentation.LazyColumnSimpSons
 import com.example.compose.SimpSonsTheme
 
 class CharacterListFragment : Fragment() {
@@ -107,7 +106,7 @@ class CharacterListFragment : Fragment() {
                             modifier = Modifier.fillMaxWidth()
                         )
 
-                        LazyColumnSimpSons(
+                        LazyColumnCharacter(
                             characters = filteredCharacters
                         )
                     }

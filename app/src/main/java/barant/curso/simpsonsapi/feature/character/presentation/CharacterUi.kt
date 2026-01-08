@@ -8,5 +8,6 @@ data class CharacterUi(
     val age: String,
     val gender: String,
     val occupation: String,
-    val phrase: String
+    val phrase: String,
+    val birthdate: String = "15/05/2006"
 )

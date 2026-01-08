@@ -1,4 +1,4 @@
-package barant.curso.simpsonsapi.feature.character.presentation
+package barant.curso.simpsonsapi.feature.character.presentation.list
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

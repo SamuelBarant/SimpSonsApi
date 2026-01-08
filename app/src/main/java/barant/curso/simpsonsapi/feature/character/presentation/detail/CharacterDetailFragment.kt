@@ -1,70 +1,219 @@
 package barant.curso.simpsonsapi.feature.character.presentation.detail
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.outlined.CalendarToday
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import barant.curso.simpsonsapi.R
-import barant.curso.simpsonsapi.core.presentation.ext.fromUrl
-import barant.curso.simpsonsapi.databinding.FragmentItemCharacterDetailsBinding
-import barant.curso.simpsonsapi.feature.character.presentation.detail.adapter.CharacterPhrasesListAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
-
-class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_details) {
-
-    private val viewModel: CharacterDetailViewModel by viewModel()
-
-    private var _binding: FragmentItemCharacterDetailsBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var adapter: CharacterPhrasesListAdapter
+import barant.curso.simpsonsapi.feature.character.presentation.CharacterUi
+import com.example.compose.SimpSonsTheme
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentItemCharacterDetailsBinding.bind(view)
+class CharacterDetailFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
-        val id = requireArguments().getInt("id")
+            setContent {
+                SimpSonsTheme {
+                    val gradient = Brush.linearGradient(
+                        listOf(
+                            colorResource(R.color.gradientBackgroundStart),
+                            colorResource(R.color.gradientBackgroundEnd)
+                        )
+                    )
 
-        adapter = CharacterPhrasesListAdapter(emptyList())
+                    // Datos mock
+                    val sampleCharacter = CharacterUi(
+                            imageRes = R.drawable.person_24px,
+                            name = "Homer Simpson",
+                            age = "45",
+                            gender = "M",
+                            occupation = "Nuclear Safety",
+                            phrase = "D'oh!",
+                            birthdate = "15/05/2006"
+                    )
+                    val sampleCharacterPhrases: List<String> = listOf(
+                        "Hola",
+                        "Adios",
+                        "loihsd",
+                        "lasjf"
+                    )
 
-        setupRecycler()
-
-        observeUi()
-        viewModel.loadCharacter(id)
-    }
-
-    private fun setupRecycler() {
-        binding.listPhrasesCharacterContainer.layoutManager = LinearLayoutManager(requireContext())
-        binding.listPhrasesCharacterContainer.adapter = adapter
-    }
-
-    private fun observeUi() {
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            state.data?.let { character ->
-                adapter = CharacterPhrasesListAdapter(character.phrase ?: emptyList())
-                binding.listPhrasesCharacterContainer.adapter = adapter
-
-                binding.apply {
-                    nameCharacter.text = character.name
-                    ageCharacter.text = character.age?.toString() ?: getString(R.string.unknown1)
-                    occupationCharacter.text =
-                        character.occupation.ifBlank { getString(R.string.unknown2) }
-                    genderCharacter.text = character.gender.ifBlank { getString(R.string.unknown2) }
-                    imgCharacter.fromUrl(character.img)
-                    statusCharacter.text = character.status.ifBlank { getString(R.string.unknown1) }
-                    birthdateCharacter.text = character.birthdate ?: getString(R.string.unknown3)
+                    Column(
+                        modifier = Modifier.fillMaxSize().background(gradient).padding(10.dp)
+                    ) {
+                        Text(
+                            text = sampleCharacter.name,
+                            style = MaterialTheme.typography.titleMedium,
+                            modifier = Modifier.padding(top = 20.dp)
+                        )
+                        Box (
+                            modifier = Modifier.padding(top = 20.dp)
+                        ){
+                            Row {
+                                Image(
+                                    painter = painterResource(id = sampleCharacter.imageRes),
+                                    contentDescription = sampleCharacter.name,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .size(150.dp)
+                                        .clip(RoundedCornerShape(10.dp))
+                                )
+                                Column (
+                                    modifier = Modifier.padding(start = 10.dp)
+                                ){
+                                    Column {
+                                        Row (
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ){
+                                            Icon(
+                                                imageVector = Icons.Outlined.CalendarToday,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Text(
+                                                text = stringResource(id = R.string.labelAgeCharacter),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                fontWeight = FontWeight.W500
+                                            )
+                                        }
+                                        Text(
+                                            modifier = Modifier.padding(start = 10.dp),
+                                            text = sampleCharacter.age
+                                        )
+                                    }
+                                    Column {
+                                        Row (
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ){
+                                            Icon(
+                                                imageVector = Icons.Outlined.Person,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Text(
+                                                text = stringResource(id = R.string.labelAgeCharacter),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                fontWeight = FontWeight.W500
+                                            )
+                                        }
+                                        Text(
+                                            modifier = Modifier.padding(start = 10.dp),
+                                            text = sampleCharacter.gender
+                                        )
+                                    }
+                                    Column {
+                                        Row (
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ){
+                                            Icon(
+                                                imageVector = Icons.Outlined.Person,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Text(
+                                                text = stringResource(id = R.string.labelOccupationCharacter),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                fontWeight = FontWeight.W500
+                                            )
+                                        }
+                                        Text(
+                                            modifier = Modifier.padding(start = 10.dp),
+                                            text = sampleCharacter.occupation
+                                        )
+                                    }
+                                    Column {
+                                        Row (
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ){
+                                            Icon(
+                                                imageVector = Icons.Outlined.FavoriteBorder,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Text(
+                                                text = stringResource(id = R.string.labelOccupationCharacter),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                fontWeight = FontWeight.W500
+                                            )
+                                        }
+                                        Text(
+                                            modifier = Modifier.padding(start = 10.dp),
+                                            text = sampleCharacter.occupation
+                                        )
+                                    }
+                                    Column {
+                                        Row (
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ){
+                                            Icon(
+                                                imageVector = Icons.Outlined.Person,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Text(
+                                                text = stringResource(id = R.string.labelBirthdateCharacter),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                fontWeight = FontWeight.W500
+                                            )
+                                        }
+                                        Text(
+                                            modifier = Modifier.padding(start = 10.dp),
+                                            text = sampleCharacter.birthdate
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                        Text(
+                            text = stringResource(id = R.string.labelPhrasesCharacter),
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                        LazyColumnPhrase(sampleCharacterPhrases)
+                    }
                 }
             }
         }
-
-        binding.exitButton.setOnClickListener {
-            findNavController().navigate(R.id.back_to_list)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
