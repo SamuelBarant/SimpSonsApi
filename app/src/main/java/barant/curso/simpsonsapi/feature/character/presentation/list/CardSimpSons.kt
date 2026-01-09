@@ -1,5 +1,6 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -27,10 +28,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import barant.curso.simpsonsapi.R
+import coil3.compose.AsyncImage
 
 @Composable
 fun CardSimpSons(
-    @DrawableRes imageRes: Int,
+    img: String,
     name: String,
     age: String,
     gender: String,
@@ -38,6 +40,7 @@ fun CardSimpSons(
     phrase: String,
     modifier: Modifier = Modifier
 ) {
+    Log.d("@img",img)
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
@@ -53,13 +56,15 @@ fun CardSimpSons(
                 .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = imageRes),
+
+            AsyncImage(
+                model = img,
                 contentDescription = name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(70.dp)
                     .clip(CircleShape)
+                    .align(Alignment.Top)
             )
 
             Spacer(modifier = Modifier.width(10.dp))

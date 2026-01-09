@@ -79,6 +79,7 @@ dependencies {
     //Img
     implementation(libs.coil3.coil)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.coil.compose)
 
     //Retrofit
     implementation(libs.retrofit.v300)
@@ -102,6 +103,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
     //Test
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

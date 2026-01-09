@@ -18,11 +18,13 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.core.presentation.ui.components.SimpleSearchBar
 import barant.curso.simpsonsapi.core.presentation.ui.components.TopAppBarSimpsons
-import barant.curso.simpsonsapi.feature.character.presentation.CharacterUi
 import com.example.compose.SimpSonsTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterListFragment : Fragment() {
 
@@ -42,6 +44,9 @@ class CharacterListFragment : Fragment() {
 
                 SimpSonsTheme {
 
+                    val viewModel : CharacterListViewModel by viewModel()
+                    val lazyItemsList = viewModel.characterFlow.collectAsLazyPagingItems()
+
                     val gradient = Brush.linearGradient(
                         listOf(
                             colorResource(R.color.gradientBackgroundStart),
@@ -49,45 +54,7 @@ class CharacterListFragment : Fragment() {
                         )
                     )
 
-                    // Datos mock
-                    val sampleCharacters = listOf(
-                        CharacterUi(
-                            imageRes = R.drawable.person_24px,
-                            name = "Homer Simpson",
-                            age = "45",
-                            gender = "M",
-                            occupation = "Nuclear Safety",
-                            phrase = "D'oh!"
-                        ),
-                        CharacterUi(
-                            imageRes = R.drawable.person_24px,
-                            name = "Marge Simpson",
-                            age = "43",
-                            gender = "F",
-                            occupation = "Homemaker",
-                            phrase = "Mmm..."
-                        ),
-                        CharacterUi(
-                            imageRes = R.drawable.person_24px,
-                            name = "Bart Simpson",
-                            age = "10",
-                            gender = "M",
-                            occupation = "Student",
-                            phrase = "Eat my shorts!"
-                        )
-                    )
-
                     var query by remember { mutableStateOf("") }
-
-                    val filteredCharacters = remember(query) {
-                        if (query.isBlank()) {
-                            sampleCharacters
-                        } else {
-                            sampleCharacters.filter {
-                                it.name.contains(query, ignoreCase = true)
-                            }
-                        }
-                    }
 
                     Column(
                         modifier = Modifier
@@ -102,12 +69,15 @@ class CharacterListFragment : Fragment() {
 
                         SimpleSearchBar(
                             query = query,
-                            onTextChanged = { query = it },
+                            onTextChanged = {
+                                query = it
+                                viewModel.onSearchQueryChanged(query)
+                            },
                             modifier = Modifier.fillMaxWidth()
                         )
 
                         LazyColumnCharacter(
-                            characters = filteredCharacters
+                            characters = lazyItemsList
                         )
                     }
                 }
