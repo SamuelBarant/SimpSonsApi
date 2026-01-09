@@ -50,7 +50,6 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.androidx.material.icons.extended)
 
-
     //Compose
     val composeBom = platform("androidx.compose:compose-bom:2025.12.00")
     implementation(composeBom)
