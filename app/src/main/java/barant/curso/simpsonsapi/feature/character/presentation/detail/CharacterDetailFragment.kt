@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.Favorite
@@ -41,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import barant.curso.simpsonsapi.R
+import barant.curso.simpsonsapi.core.presentation.ui.components.ActionButton
 import barant.curso.simpsonsapi.feature.character.presentation.CharacterUi
 import com.example.compose.SimpSonsTheme
 
@@ -77,141 +80,165 @@ class CharacterDetailFragment : Fragment() {
                         "Hola",
                         "Adios",
                         "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
+                        "loihsd",
                         "lasjf"
                     )
-
-                    Column(
-                        modifier = Modifier.fillMaxSize().background(gradient).padding(10.dp)
-                    ) {
-                        Text(
-                            text = sampleCharacter.name,
-                            style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier.padding(top = 20.dp)
-                        )
-                        Box (
-                            modifier = Modifier.padding(top = 20.dp)
-                        ){
-                            Row {
-                                Image(
-                                    painter = painterResource(id = sampleCharacter.imageRes),
-                                    contentDescription = sampleCharacter.name,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier
-                                        .size(150.dp)
-                                        .clip(RoundedCornerShape(10.dp))
-                                )
-                                Column (
-                                    modifier = Modifier.padding(start = 10.dp)
-                                ){
-                                    Column {
-                                        Row (
-                                            verticalAlignment = Alignment.CenterVertically
-                                        ){
-                                            Icon(
-                                                imageVector = Icons.Outlined.CalendarToday,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(18.dp)
-                                            )
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                    ){
+                        Column(
+                            modifier = Modifier.fillMaxSize().background(gradient).padding(10.dp)
+                        ) {
+                            Text(
+                                text = sampleCharacter.name,
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.padding(top = 20.dp)
+                            )
+                            Box (
+                                modifier = Modifier.padding(top = 20.dp)
+                            ){
+                                Row {
+                                    Image(
+                                        painter = painterResource(id = sampleCharacter.imageRes),
+                                        contentDescription = sampleCharacter.name,
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier
+                                            .size(150.dp)
+                                            .clip(RoundedCornerShape(10.dp))
+                                    )
+                                    Column (
+                                        modifier = Modifier.padding(start = 10.dp)
+                                    ){
+                                        Column {
+                                            Row (
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ){
+                                                Icon(
+                                                    imageVector = Icons.Outlined.CalendarToday,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                                Text(
+                                                    text = stringResource(id = R.string.labelAgeCharacter),
+                                                    style = MaterialTheme.typography.bodyLarge,
+                                                    fontWeight = FontWeight.W500
+                                                )
+                                            }
                                             Text(
-                                                text = stringResource(id = R.string.labelAgeCharacter),
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.W500
+                                                modifier = Modifier.padding(start = 10.dp),
+                                                text = sampleCharacter.age
                                             )
                                         }
-                                        Text(
-                                            modifier = Modifier.padding(start = 10.dp),
-                                            text = sampleCharacter.age
-                                        )
-                                    }
-                                    Column {
-                                        Row (
-                                            verticalAlignment = Alignment.CenterVertically
-                                        ){
-                                            Icon(
-                                                imageVector = Icons.Outlined.Person,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(18.dp)
-                                            )
+                                        Column {
+                                            Row (
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ){
+                                                Icon(
+                                                    imageVector = Icons.Outlined.Person,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                                Text(
+                                                    text = stringResource(id = R.string.labelAgeCharacter),
+                                                    style = MaterialTheme.typography.bodyLarge,
+                                                    fontWeight = FontWeight.W500
+                                                )
+                                            }
                                             Text(
-                                                text = stringResource(id = R.string.labelAgeCharacter),
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.W500
+                                                modifier = Modifier.padding(start = 10.dp),
+                                                text = sampleCharacter.gender
                                             )
                                         }
-                                        Text(
-                                            modifier = Modifier.padding(start = 10.dp),
-                                            text = sampleCharacter.gender
-                                        )
-                                    }
-                                    Column {
-                                        Row (
-                                            verticalAlignment = Alignment.CenterVertically
-                                        ){
-                                            Icon(
-                                                imageVector = Icons.Outlined.Person,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(18.dp)
-                                            )
+                                        Column {
+                                            Row (
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ){
+                                                Icon(
+                                                    imageVector = Icons.Outlined.Person,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                                Text(
+                                                    text = stringResource(id = R.string.labelOccupationCharacter),
+                                                    style = MaterialTheme.typography.bodyLarge,
+                                                    fontWeight = FontWeight.W500
+                                                )
+                                            }
                                             Text(
-                                                text = stringResource(id = R.string.labelOccupationCharacter),
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.W500
+                                                modifier = Modifier.padding(start = 10.dp),
+                                                text = sampleCharacter.occupation
                                             )
                                         }
-                                        Text(
-                                            modifier = Modifier.padding(start = 10.dp),
-                                            text = sampleCharacter.occupation
-                                        )
-                                    }
-                                    Column {
-                                        Row (
-                                            verticalAlignment = Alignment.CenterVertically
-                                        ){
-                                            Icon(
-                                                imageVector = Icons.Outlined.FavoriteBorder,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(18.dp)
-                                            )
+                                        Column {
+                                            Row (
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ){
+                                                Icon(
+                                                    imageVector = Icons.Outlined.FavoriteBorder,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                                Text(
+                                                    text = stringResource(id = R.string.labelOccupationCharacter),
+                                                    style = MaterialTheme.typography.bodyLarge,
+                                                    fontWeight = FontWeight.W500
+                                                )
+                                            }
                                             Text(
-                                                text = stringResource(id = R.string.labelOccupationCharacter),
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.W500
+                                                modifier = Modifier.padding(start = 10.dp),
+                                                text = sampleCharacter.occupation
                                             )
                                         }
-                                        Text(
-                                            modifier = Modifier.padding(start = 10.dp),
-                                            text = sampleCharacter.occupation
-                                        )
-                                    }
-                                    Column {
-                                        Row (
-                                            verticalAlignment = Alignment.CenterVertically
-                                        ){
-                                            Icon(
-                                                imageVector = Icons.Outlined.Person,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(18.dp)
-                                            )
+                                        Column {
+                                            Row (
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ){
+                                                Icon(
+                                                    imageVector = Icons.Outlined.Person,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(18.dp)
+                                                )
+                                                Text(
+                                                    text = stringResource(id = R.string.labelBirthdateCharacter),
+                                                    style = MaterialTheme.typography.bodyLarge,
+                                                    fontWeight = FontWeight.W500
+                                                )
+                                            }
                                             Text(
-                                                text = stringResource(id = R.string.labelBirthdateCharacter),
-                                                style = MaterialTheme.typography.bodyLarge,
-                                                fontWeight = FontWeight.W500
+                                                modifier = Modifier.padding(start = 10.dp),
+                                                text = sampleCharacter.birthdate
                                             )
                                         }
-                                        Text(
-                                            modifier = Modifier.padding(start = 10.dp),
-                                            text = sampleCharacter.birthdate
-                                        )
                                     }
                                 }
                             }
+                            Text(
+                                text = stringResource(id = R.string.labelPhrasesCharacter),
+                                style = MaterialTheme.typography.titleSmall
+                            )
+                            LazyColumnPhrase(sampleCharacterPhrases)
                         }
-                        Text(
-                            text = stringResource(id = R.string.labelPhrasesCharacter),
-                            style = MaterialTheme.typography.titleSmall
+                        ActionButton(
+                            icon = Icons.Default.ArrowBackIosNew,
+                            modifier = Modifier
+                                .align(Alignment.BottomEnd)
+                                .padding(20.dp)
                         )
-                        LazyColumnPhrase(sampleCharacterPhrases)
                     }
+
                 }
             }
         }
