@@ -1,4 +1,4 @@
-package com.example.compose
+package barant.curso.simpsonsapi.core.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import barant.curso.simpsonsapi.core.presentation.ui.theme.AppTypography
 
 @Immutable
 data class ExtendedColorScheme(

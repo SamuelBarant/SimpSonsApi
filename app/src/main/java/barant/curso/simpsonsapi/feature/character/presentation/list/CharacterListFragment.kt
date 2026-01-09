@@ -23,7 +23,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.core.presentation.ui.components.SimpleSearchBar
 import barant.curso.simpsonsapi.core.presentation.ui.components.TopAppBarSimpsons
-import com.example.compose.SimpSonsTheme
+import barant.curso.simpsonsapi.core.presentation.ui.theme.SimpSonsTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterListFragment : Fragment() {

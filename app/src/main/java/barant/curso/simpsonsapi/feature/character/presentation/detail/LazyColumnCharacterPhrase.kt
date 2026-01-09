@@ -43,7 +43,9 @@ fun LazyColumnPhrase(
                     .wrapContentHeight()
             ){
                 Box(
-                    modifier = Modifier.fillMaxSize().padding(10.dp),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     Text(

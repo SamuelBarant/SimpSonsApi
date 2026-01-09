@@ -1,4 +1,4 @@
-package com.example.compose
+package barant.curso.simpsonsapi.core.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

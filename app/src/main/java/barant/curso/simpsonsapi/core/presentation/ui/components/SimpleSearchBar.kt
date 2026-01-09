@@ -15,15 +15,17 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import barant.curso.simpsonsapi.R
 
 @Composable
 fun SimpleSearchBar(
     query: String,
     onTextChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "Buscar...",
+    placeholder: String = stringResource(id = R.string.searchBarHint),
     onSearch: () -> Unit = {}
 ) {
     val focusManager = LocalFocusManager.current
@@ -38,7 +40,7 @@ fun SimpleSearchBar(
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = "Clear"
+                contentDescription = "Search"
             )
         },
         trailingIcon = {

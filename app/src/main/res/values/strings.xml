@@ -15,7 +15,10 @@
     <string name="unknown1">Desconocido</string>
     <string name="unknown2">No indicado</string>
     <string name="unknown3">Sin fecha</string>
-    <string name="searchBarHint">Buscar por nombre:</string>
+    <string name="searchBarHint">Buscar por nombre...</string>
     <string name="descriptionImageSimpsonCharacter">Imagen del personaje</string>
+
+    <string name="imgUrl">https://cdn.thesimpsonsapi.com/500</string>
+
 
 </resources>

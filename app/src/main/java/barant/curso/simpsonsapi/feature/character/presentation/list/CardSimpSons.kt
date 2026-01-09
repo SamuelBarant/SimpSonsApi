@@ -1,6 +1,5 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -13,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Work
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -42,12 +43,11 @@ fun CardSimpSons(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Log.d("@img",img)
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(bottom = 20.dp)
-            .clickable{ onClick() },
+            .clickable { onClick() },
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -104,7 +104,7 @@ fun CardSimpSons(
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Image(
-                            painter = painterResource(id = R.drawable.person_24px),
+                            imageVector = Icons.Default.Work,
                             contentDescription = null,
                             modifier = Modifier.size(16.dp),
                             contentScale = ContentScale.Fit

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import barant.curso.simpsonsapi.core.presentation.ui.components.ErrorView
 import barant.curso.simpsonsapi.core.presentation.ui.components.LoadingView
-import com.example.compose.SimpSonsTheme
+import barant.curso.simpsonsapi.core.presentation.ui.theme.SimpSonsTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterDetailFragment : Fragment() {
@@ -42,7 +42,7 @@ class CharacterDetailFragment : Fragment() {
 
                     when {
                         uiState.isLoading -> LoadingView()
-                        uiState.error != null -> ErrorView(uiState.error!!.message ?: "Unknown error")
+                        uiState.error != null -> ErrorView(uiState.error?.message ?: "Unknown error")
                         uiState.data != null -> CharacterDetailContent(character = uiState.data!!, navController = navController)
                     }
                 }

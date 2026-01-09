@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.CalendarToday
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Work
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -65,7 +66,7 @@ fun CharacterDetailContent(
             ) {
                 Row {
                     AsyncImage(
-                        model = "https://cdn.thesimpsonsapi.com/500${character.img}",
+                        model = stringResource(id = R.string.imgUrl).plus(character.img),
                         contentDescription = character.name,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -121,7 +122,7 @@ fun CharacterDetailContent(
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(
-                                    imageVector = Icons.Outlined.Person,
+                                    imageVector = Icons.Outlined.Work,
                                     contentDescription = null,
                                     modifier = Modifier.size(18.dp)
                                 )
@@ -161,7 +162,7 @@ fun CharacterDetailContent(
                         Column {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(
-                                    imageVector = Icons.Outlined.Person,
+                                    imageVector = Icons.Outlined.CalendarToday,
                                     contentDescription = null,
                                     modifier = Modifier.size(18.dp)
                                 )
