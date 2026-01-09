@@ -11,11 +11,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 @Composable
 fun ActionButton(
     icon: ImageVector,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
     FloatingActionButton(
         modifier = modifier,
-        onClick = {/*TODO*/},
+        onClick = onClick,
         content = {
             Icon(
                 imageVector = icon,

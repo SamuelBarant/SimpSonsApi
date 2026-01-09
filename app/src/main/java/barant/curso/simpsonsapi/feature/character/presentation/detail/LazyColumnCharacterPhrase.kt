@@ -4,11 +4,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -42,15 +40,15 @@ fun LazyColumnPhrase(
                 border = BorderStroke(1.dp, color = Color.LightGray),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .size(40.dp)
+                    .wrapContentHeight()
             ){
                 Box(
-                    modifier = Modifier.fillMaxSize().padding(start = 10.dp),
+                    modifier = Modifier.fillMaxSize().padding(10.dp),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     Text(
                         text = phrases,
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodySmall,
                     )
                 }
             }

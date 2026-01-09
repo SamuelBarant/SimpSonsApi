@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.fragment.findNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import barant.curso.simpsonsapi.R
 import barant.curso.simpsonsapi.core.presentation.ui.components.SimpleSearchBar
@@ -33,18 +33,14 @@ class CharacterListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         return ComposeView(requireContext()).apply {
-
-            setViewCompositionStrategy(
-                ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
-            )
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
             setContent {
-
                 SimpSonsTheme {
 
-                    val viewModel : CharacterListViewModel by viewModel()
+                    val navController = findNavController()
+                    val viewModel: CharacterListViewModel by viewModel()
                     val lazyItemsList = viewModel.characterFlow.collectAsLazyPagingItems()
 
                     val gradient = Brush.linearGradient(
@@ -77,7 +73,12 @@ class CharacterListFragment : Fragment() {
                         )
 
                         LazyColumnCharacter(
-                            characters = lazyItemsList
+                            characters = lazyItemsList,
+                            onCharacterClick = { id ->
+                                val action = CharacterListFragmentDirections
+                                    .actionCharacterListToCharacterDetail(id)
+                                navController.navigate(action)
+                            }
                         )
                     }
                 }

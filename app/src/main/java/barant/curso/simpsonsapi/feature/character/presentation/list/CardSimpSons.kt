@@ -1,8 +1,8 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list
 
 import android.util.Log
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +24,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,13 +39,15 @@ fun CardSimpSons(
     gender: String,
     occupation: String,
     phrase: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Log.d("@img",img)
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .padding(bottom = 20.dp),
+            .padding(bottom = 20.dp)
+            .clickable{ onClick() },
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -82,9 +85,9 @@ fun CardSimpSons(
                     Spacer(modifier = Modifier.weight(1f))
 
                     Text(
-                        text = age,
+                        text = "${age} ${stringResource(id = R.string.ageSuffix)}",
                         fontSize = 12.sp,
-                        modifier = Modifier.padding(end = 8.dp),
+                        modifier = Modifier.padding(end = 17.dp),
                         style = MaterialTheme.typography.labelMedium
 
                     )

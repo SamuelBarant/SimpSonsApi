@@ -1,31 +1,29 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import barant.curso.simpsonsapi.feature.character.domain.Character
-import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun LazyColumnCharacter(
     characters: LazyPagingItems<Character>,
+    onCharacterClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -61,7 +59,11 @@ fun LazyColumnCharacter(
                             age = it.age.toString(),
                             gender = it.gender,
                             occupation = it.occupation,
-                            phrase = it.phrase?.firstOrNull() ?: ""
+                            phrase = it.phrase?.firstOrNull() ?: "",
+                            onClick = {
+                                Log.d("@dev","Ok")
+                                onCharacterClick(it.id)
+                            }
                         )
                     }
                 }

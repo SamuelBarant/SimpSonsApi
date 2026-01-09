@@ -7,16 +7,16 @@
     <fragment
         android:id="@+id/characterListFragment"
         android:name="barant.curso.simpsonsapi.feature.character.presentation.list.CharacterListFragment"
-        android:label="CharacterListFragment">
+        android:label="Listado de personajes" >
         <action
             android:id="@+id/action_characterList_to_characterDetail"
-            app:destination="@+id/characterListDetailFragment" />
+            app:destination="@id/characterDetailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/characterListDetailFragment"
+        android:id="@+id/characterDetailFragment"
         android:name="barant.curso.simpsonsapi.feature.character.presentation.detail.CharacterDetailFragment"
-        android:label="CharacterListDetailFragment">
+        android:label="Detalles de personajes" >
         <argument
             android:name="id"
             app:argType="integer" />

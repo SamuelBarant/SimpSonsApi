@@ -39,6 +39,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        dataBinding = true
         viewBinding = true
         buildConfig = true
         compose = true
@@ -49,6 +50,7 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.material3)
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.runtime.livedata)
 
     //Compose
     val composeBom = platform("androidx.compose:compose-bom:2025.12.00")

@@ -20,7 +20,7 @@ val AppTypography = Typography(
     titleLarge = baseline.titleLarge.copy(
         fontFamily = h1FontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 38.sp,
+        fontSize = 48.sp,
         color = extendedLight.customColor1.colorContainer
     ),
     titleMedium = baseline.titleMedium.copy(
