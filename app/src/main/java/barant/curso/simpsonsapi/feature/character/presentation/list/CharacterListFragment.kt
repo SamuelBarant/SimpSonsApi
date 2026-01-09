@@ -1,86 +1,88 @@
 package barant.curso.simpsonsapi.feature.character.presentation.list
 
 import android.os.Bundle
-import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import androidx.core.os.bundleOf
+import android.view.ViewGroup
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.compose.collectAsLazyPagingItems
 import barant.curso.simpsonsapi.R
-import barant.curso.simpsonsapi.databinding.FragmentListCharacterBinding
-import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import barant.curso.simpsonsapi.core.presentation.ui.components.SimpleSearchBar
+import barant.curso.simpsonsapi.core.presentation.ui.components.TopAppBarSimpsons
+import barant.curso.simpsonsapi.core.presentation.ui.theme.SimpSonsTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterListFragment : Fragment(R.layout.fragment_list_character) {
+class CharacterListFragment : Fragment() {
 
-    private var _binding: FragmentListCharacterBinding? = null
-    private val binding get() = _binding!!
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
-    private val viewModel: CharacterListViewModel by viewModel()
-    private lateinit var adapter: CharacterListItemAdapter
+            setContent {
+                SimpSonsTheme {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentListCharacterBinding.bind(view)
+                    val navController = findNavController()
+                    val viewModel: CharacterListViewModel by viewModel()
+                    val lazyItemsList = viewModel.characterFlow.collectAsLazyPagingItems()
 
-        setupRecycler()
-        setupSearchBar()
-        observerCharacter()
-    }
+                    val gradient = Brush.linearGradient(
+                        listOf(
+                            colorResource(R.color.gradientBackgroundStart),
+                            colorResource(R.color.gradientBackgroundEnd)
+                        )
+                    )
 
-    private fun setupRecycler() {
-        adapter = CharacterListItemAdapter { character ->
-            findNavController().navigate(
-                R.id.action_characterList_to_characterDetail,
-                bundleOf("id" to character.id)
-            )
-        }
+                    var query by remember { mutableStateOf("") }
 
-        binding.characterContainer.layoutManager = LinearLayoutManager(requireContext())
-        binding.characterContainer.adapter = adapter
-    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(gradient)
+                    ) {
 
-    private fun setupSearchBar() {
-        val searchBar = binding.searchBar
-        val searchView = binding.searchView
+                        TopAppBarSimpsons(
+                            modifier = Modifier.fillMaxWidth(),
+                            label = getString(R.string.subtitleList)
+                        )
 
-        searchView.setupWithSearchBar(searchBar)
+                        SimpleSearchBar(
+                            query = query,
+                            onTextChanged = {
+                                query = it
+                                viewModel.onSearchQueryChanged(query)
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        )
 
-        binding.searchView.editText.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN)
-            ) {
-                val query = v.text.toString()
-                viewModel.onSearchQueryChanged(query)
-                binding.searchView.hide()
-                if (query.isNotEmpty()) {
-                    searchBar.hint = query
-                } else {
-                    searchBar.hint = getString(R.string.searchBarHint)
+                        LazyColumnCharacter(
+                            characters = lazyItemsList,
+                            onCharacterClick = { id ->
+                                val action = CharacterListFragmentDirections
+                                    .actionCharacterListToCharacterDetail(id)
+                                navController.navigate(action)
+                            }
+                        )
+                    }
                 }
-                true
-            } else {
-                false
             }
         }
-
-    }
-
-    private fun observerCharacter() {
-        lifecycleScope.launch {
-            viewModel.characterFlow.collectLatest { pagingData ->
-                adapter.submitData(pagingData)
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding == null
     }
 }

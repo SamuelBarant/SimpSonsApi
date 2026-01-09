@@ -7,9 +7,7 @@ import barant.curso.simpsonsapi.feature.character.domain.CharacterRepository
 import barant.curso.simpsonsapi.feature.character.domain.GetByIdCharacterUseCase
 import barant.curso.simpsonsapi.feature.character.domain.GetPageCharacterUseCase
 import barant.curso.simpsonsapi.feature.character.presentation.detail.CharacterDetailViewModel
-import barant.curso.simpsonsapi.feature.character.presentation.detail.adapter.CharacterPhrasesListAdapter
 import barant.curso.simpsonsapi.feature.character.presentation.list.CharacterListViewModel
-import barant.curso.simpsonsapi.feature.character.presentation.list.adapter.CharacterListItemAdapter
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModel
@@ -21,10 +19,6 @@ val characterModule = module {
     // ViewModels
     viewModel { CharacterListViewModel(get()) }
     viewModel { CharacterDetailViewModel(get()) }
-
-    // UI adapters
-    factoryOf(::CharacterListItemAdapter)
-    factoryOf(::CharacterPhrasesListAdapter)
 
     // Repository
     factoryOf(::CharacterDataSourceRepository) bind CharacterRepository::class

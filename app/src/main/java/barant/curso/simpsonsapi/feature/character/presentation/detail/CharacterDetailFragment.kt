@@ -1,70 +1,52 @@
 package barant.curso.simpsonsapi.feature.character.presentation.detail
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import barant.curso.simpsonsapi.R
-import barant.curso.simpsonsapi.core.presentation.ext.fromUrl
-import barant.curso.simpsonsapi.databinding.FragmentItemCharacterDetailsBinding
-import barant.curso.simpsonsapi.feature.character.presentation.detail.adapter.CharacterPhrasesListAdapter
+import barant.curso.simpsonsapi.core.presentation.ui.components.ErrorView
+import barant.curso.simpsonsapi.core.presentation.ui.components.LoadingView
+import barant.curso.simpsonsapi.core.presentation.ui.theme.SimpSonsTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterDetailFragment : Fragment(R.layout.fragment_item_character_details) {
-
+class CharacterDetailFragment : Fragment() {
     private val viewModel: CharacterDetailViewModel by viewModel()
 
-    private var _binding: FragmentItemCharacterDetailsBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var adapter: CharacterPhrasesListAdapter
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val characterId = arguments?.getInt("id") ?: -1
 
+        return ComposeView(requireContext()).apply {
+            val navController = findNavController()
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentItemCharacterDetailsBinding.bind(view)
+            setContent {
+                SimpSonsTheme {
+                    val uiState by viewModel.uiState.observeAsState(
+                        CharacterDetailViewModel.UiState(isLoading = true)
+                    )
 
-        val id = requireArguments().getInt("id")
+                    LaunchedEffect(characterId) {
+                        viewModel.loadCharacter(characterId)
+                    }
 
-        adapter = CharacterPhrasesListAdapter(emptyList())
-
-        setupRecycler()
-
-        observeUi()
-        viewModel.loadCharacter(id)
-    }
-
-    private fun setupRecycler() {
-        binding.listPhrasesCharacterContainer.layoutManager = LinearLayoutManager(requireContext())
-        binding.listPhrasesCharacterContainer.adapter = adapter
-    }
-
-    private fun observeUi() {
-        viewModel.uiState.observe(viewLifecycleOwner) { state ->
-            state.data?.let { character ->
-                adapter = CharacterPhrasesListAdapter(character.phrase ?: emptyList())
-                binding.listPhrasesCharacterContainer.adapter = adapter
-
-                binding.apply {
-                    nameCharacter.text = character.name
-                    ageCharacter.text = character.age?.toString() ?: getString(R.string.unknown1)
-                    occupationCharacter.text =
-                        character.occupation.ifBlank { getString(R.string.unknown2) }
-                    genderCharacter.text = character.gender.ifBlank { getString(R.string.unknown2) }
-                    imgCharacter.fromUrl(character.img)
-                    statusCharacter.text = character.status.ifBlank { getString(R.string.unknown1) }
-                    birthdateCharacter.text = character.birthdate ?: getString(R.string.unknown3)
+                    when {
+                        uiState.isLoading -> LoadingView()
+                        uiState.error != null -> ErrorView(uiState.error?.message ?: "Unknown error")
+                        uiState.data != null -> CharacterDetailContent(character = uiState.data!!, navController = navController)
+                    }
                 }
             }
         }
-
-        binding.exitButton.setOnClickListener {
-            findNavController().navigate(R.id.back_to_list)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
